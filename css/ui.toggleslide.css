@@ -1,0 +1,89 @@
+/*** widget css ***/
+
+.ui-toggleslide .ui-toggle,
+.ui-toggleslide .ui-content a {
+  height: 25px;
+  line-height: 25px;
+}
+.ui-toggleslide .ui-toggle {
+  display: block;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ccc;
+  color: #666;
+  padding: 0 5px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: hand;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.ui-toggleslide .ui-content {
+  position: relative;
+  z-index: 1;
+}
+
+
+/*** examples css ***/
+
+.example {
+  font-family: arial, verdana, sans-serif;
+  position: relative;
+  float: left;
+  margin-right: 10px;
+}
+.example p {
+  margin: 0;
+  padding: 5px;
+  display: table-cell;
+  vertical-align: bottom;
+  font-size: 12px;
+  color: green;
+  background-color: #cfe;
+  height: 75px;
+  line-height: 18px;
+  width: 125px;
+}
+.example .ui-toggleslide {
+  margin: 15px 0;
+}
+
+#menu-examples .ui-toggleslide ul,
+#menu-examples .ui-toggleslide li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#menu-examples .ui-toggleslide .ui-content a {
+  background-color: #fee;
+  border-bottom: 1px solid #fff;
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  color: #f90;
+  text-decoration: none;
+  padding: 0 5px;
+}
+#menu-examples .ui-toggleslide .ui-content a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+#other-examples p {
+  width: 398px;
+}
+
+/********* Hacks! **********/
+
+.clearfix:after {
+  content: "."; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;
+}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
