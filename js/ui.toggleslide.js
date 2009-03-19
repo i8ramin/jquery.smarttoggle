@@ -11,7 +11,7 @@
  */
 (function($) {
   
-var SlideMenu = {
+var ToggleSlide = {
   _init: function() {
     var self = this,
         options = this.options;
@@ -109,7 +109,7 @@ var SlideMenu = {
 };
 
 
-$.widget("ui.toggleslide", SlideMenu);
+$.widget("ui.toggleslide", ToggleSlide);
 $.ui.toggleslide.defaults = {
   wrapperClass: 'ui-toggleslide',
   contentClass: 'ui-content',
