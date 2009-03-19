@@ -111,7 +111,7 @@ var SlideMenu = {
 
 $.widget("ui.toggleslide", SlideMenu);
 $.ui.toggleslide.defaults = {
-  wrapperClass: 'ui-wrapper',
+  wrapperClass: 'ui-toggleslide',
   contentClass: 'ui-content',
   toggleClass: 'ui-toggle',
   toggleEvent: 'hover',

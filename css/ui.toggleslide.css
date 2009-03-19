@@ -1,11 +1,11 @@
 /*** widget css ***/
 
-.ui-wrapper .ui-toggle,
-.ui-wrapper .ui-content a {
+.ui-toggleslide .ui-toggle,
+.ui-toggleslide .ui-content a {
   height: 25px;
   line-height: 25px;
 }
-.ui-wrapper .ui-toggle {
+.ui-toggleslide .ui-toggle {
   display: block;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ccc;
@@ -18,7 +18,7 @@
   position: relative;
   z-index: 2;
 }
-.ui-wrapper .ui-content {
+.ui-toggleslide .ui-content {
   position: relative;
   z-index: 1;
 }
@@ -44,17 +44,17 @@
   line-height: 18px;
   width: 125px;
 }
-.example .ui-wrapper {
+.example .ui-toggleslide {
   margin: 15px 0;
 }
 
-#menu-examples .ui-wrapper ul,
-#menu-examples .ui-wrapper li {
+#menu-examples .ui-toggleslide ul,
+#menu-examples .ui-toggleslide li {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-#menu-examples .ui-wrapper .ui-content a {
+#menu-examples .ui-toggleslide .ui-content a {
   background-color: #fee;
   border-bottom: 1px solid #fff;
   display: block;
@@ -64,7 +64,7 @@
   text-decoration: none;
   padding: 0 5px;
 }
-#menu-examples .ui-wrapper .ui-content a:hover {
+#menu-examples .ui-toggleslide .ui-content a:hover {
   background-color: #333;
   color: #fff;
 }
