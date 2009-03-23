@@ -7,10 +7,37 @@
  *  jquery-1.3.2.js
  *	ui.core.js
  *  effects.core.js
- *  effects.slide.js
  */
 (function($) {
   
+$.effects.slide2 = function(o) {
+	return this.queue(function() {
+
+		// Create element
+		var el = $(this), props = ['position','marginTop','marginLeft'];
+
+		// Set options
+		var mode = $.effects.setMode(el, o.options.mode || 'show'); // Set Mode
+		var direction = o.options.direction || 'left'; // Default Direction
+
+		el.show(); // Save & Show
+		var ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft';
+		var motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg';
+		var distance = o.options.distance || (ref == 'marginTop' ? el.outerHeight() : el.outerWidth());
+
+		// Animation
+		var animation = {};
+		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
+		
+		// Animate
+		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+			if(mode == 'hide') el.hide(); // Hide
+			if(o.callback) o.callback.apply(this, arguments); // Callback
+			el.dequeue();
+		}});
+	});
+};
+
 var ToggleSlide = {
   _init: function() {
     var self = this,
@@ -22,13 +49,14 @@ var ToggleSlide = {
     }
         
     this._isBusy = false;
-    
-    this.uiContent = this.element.find('.' + options.contentClass);
-    this.uiToggle = this.element.find('.' + options.toggleClass).disableSelection();
-    
-    options.hideOnLoad && this.uiContent.hide();
-    
-    this._isOpen = this.uiContent.css('display') === 'block';
+    this._isOpen = options.hideOnLoad;
+
+    this.uiToggle = $(options.toggle, this.element).disableSelection();
+    this.uiContent = $(options.content, this.element);
+
+    if(options.hideOnLoad) {
+      this._uiClose();
+    }
     
     if(options.toggleEvent === 'hover') {
       this.uiToggle.bind('mouseover', function(e, data) {
@@ -60,12 +88,12 @@ var ToggleSlide = {
     });
   },
   destroy: function() {
-		if(!this.element.data('toggleslide')) return;
+    if(!this.element.data('toggleslide')) return;
 		
-		this.element
-			.removeData("toggleslide")
-			.unbind(".toggleslide");
-	},
+    this.element
+      .removeData("toggleslide")
+      .unbind(".toggleslide");
+  },
   _uiOpen: function(e, data) {
     var me = this, o = this.options;
     
@@ -75,14 +103,14 @@ var ToggleSlide = {
     me._trigger('openStart', e, me);
 
     me.uiOpenTimeout = setTimeout(function() {
-      me.uiContent.show('slide', { direction: o.direction, easing: o.easing }, o.speed, function() {
+      me.uiContent.show(o.effectType, { direction: o.direction, mode: 'show', easing: o.easing }, o.speed, function() {
         me._isOpen = !(me._isBusy = false);
         me._trigger('openStop', e, me);
-      
+         
         if(o.closeOnBlur) {
-          $(document).bind('click.toggleslide', function(e) {
+          $(document).bind('click.toggleslide', function(e, data) {
             $(this).unbind('click.toggleslide');
-            me._uiClose(e);
+            me._uiClose(e, data);
           });
         }
       });
@@ -96,7 +124,7 @@ var ToggleSlide = {
         me._isBusy = true;
         me._trigger('closeStart', e, me);
         
-        me.uiContent.hide('slide', { direction: o.direction, easing: o.easing }, o.speed, function() {
+        me.uiContent.hide(o.effectType, { direction: o.direction, mode: 'hide', easing: o.easing }, o.speed, function() {
           me._isOpen = me._isBusy = false;
           me._trigger('closeStop', e, me);
         });
@@ -111,9 +139,9 @@ var ToggleSlide = {
 
 $.widget("ui.toggleslide", ToggleSlide);
 $.ui.toggleslide.defaults = {
-  wrapperClass: 'ui-toggleslide',
-  contentClass: 'ui-content',
-  toggleClass: 'ui-toggle',
+  wrapper: '.ui-toggleslide',
+  content: '.ui-content',
+  toggle: '.ui-toggle',
   toggleEvent: 'hover',
   hideOnLoad: true,
   closeOnLeave: true,
@@ -121,7 +149,8 @@ $.ui.toggleslide.defaults = {
   closeDelay: 500,
   direction: 'up',
   easing: 'swing',
-  speed: 500
+  speed: 500,
+  effectType: 'slide2'
 };
 
 })(jQuery);
