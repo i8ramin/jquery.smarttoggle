@@ -34,7 +34,7 @@ $.effects.slide = function(o) {
 		// Animation
 		var animation = {};
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
-
+		
 		// Animate
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') el.hide(); // Hide
