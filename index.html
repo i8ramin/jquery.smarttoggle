@@ -22,9 +22,13 @@
 
 <div id="menu-examples">
   <div id="example-1" class="example">
-    <p>default behavior:</p>
+    <p>
+      default behavior:<br/>
+      <small>trigger: <strong>hover</strong>, directon: <strong>up</strong></small><br/>
+      <small>hide: <strong>mouseleave</strong></small>
+    </p>
     <div class="ui-toggleslide">
-      <div class="ui-toggle">menu &#187;</div>  
+      <div class="ui-toggle">menu</div>  
       <ul class="ui-content">
         <li><a href="">Home</a></li>
         <li><a href="">Facts</a></li>
@@ -41,9 +45,13 @@
   </script>
 
   <div id="example-2" class="example">
-    <p>triggered using <strong>click</strong>; hides on mouseleave:</p>
+    <p>
+      custom behavior:<br/>
+      <small>trigger: <strong>click</strong>, directon: <strong>up</strong></small><br/>
+      <small>hide: <strong>mouseleave</strong></small>
+    </p>
     <div class="ui-toggleslide">
-      <div class="ui-toggle">menu &#187;</div>    
+      <div class="ui-toggle">menu</div>    
       <ul class="ui-content">
         <li><a href="">Home</a></li>
         <li><a href="">Facts</a></li>
@@ -56,13 +64,19 @@
     </div>
   </div>
   <script type="text/javascript" charset="utf-8">
-  $('#example-2 .ui-toggleslide').toggleslide({toggleEvent: 'click'});
+  $('#example-2 .ui-toggleslide').toggleslide({
+    toggleEvent: 'click'
+  });
   </script>
 
   <div id="example-3" class="example">
-    <p>triggered using <strong>click</strong>; hides only on toggle:</p>
+    <p>
+      custom behavior:<br/>
+      <small>trigger: <strong>click</strong>, directon: <strong>up</strong></small><br/>
+      <small>hide: <strong>click</strong></small>
+    </p>
     <div class="ui-toggleslide">
-      <div class="ui-toggle">menu &#187;</div>   
+      <div class="ui-toggle">menu</div>   
       <ul class="ui-content">
         <li><a href="">Home</a></li>
         <li><a href="">Facts</a></li>
@@ -75,11 +89,18 @@
     </div>
   </div>
   <script type="text/javascript" charset="utf-8">
-  $('#example-3 .ui-toggleslide').toggleslide({toggleEvent: 'click', closeOnLeave : false});
+  $('#example-3 .ui-toggleslide').toggleslide({
+    toggleEvent: 'click',
+    closeOnLeave : false
+  });
   </script>
 
   <div id="example-4" class="example">
-    <p>triggered using <strong>click</strong>; hides when clicked anywhere in document:</p>
+    <p>
+      custom behavior:<br/>
+      <small>trigger: <strong>click</strong>, directon: <strong>left</strong></small><br/>
+      <small>hide: <strong>click (anywhere)</strong></small>
+    </p>
     <div class="ui-toggleslide">
       <div class="ui-toggle">menu &#187;</div>   
       <ul class="ui-content">
@@ -96,14 +117,11 @@
   <script type="text/javascript" charset="utf-8">
   $('#example-4 .ui-toggleslide').toggleslide({
     toggleEvent: 'click',
+    direction: 'left',
+    easing: 'easeOutBounce',
+    speed: 1000,
     closeOnLeave : false,
-    closeOnBlur: true,
-    openStart: function() {
-      $('#example-5 .ui-toggleslide .ui-toggle').trigger('open.toggleslide', [200]);
-    },
-    closeStart: function() {
-      $('#example-5 .ui-toggleslide .ui-toggle').trigger('close.toggleslide', [200]);
-    }
+    closeOnBlur: true
   });
   </script>
 </div>
@@ -112,21 +130,23 @@
 
 <div id="other-examples">
   <div id="example-5" class="example">
-    <p>you can toggle just about anything!</p>
     <div class="ui-toggleslide">
       <div class="ui-content">
         <img src="http://upload.wikimedia.org/wikipedia/commons/2/27/Baby_ginger_monkey.jpg" alt="" />
       </div>
-      <div class="ui-toggle">monkey &#187;</div>  
+      <div class="ui-toggle">monkey</div>  
     </div>
   </div>
   <script type="text/javascript" charset="utf-8">
-  $('#example-5 .ui-toggleslide').toggleslide({toggleEvent: 'click', closeOnLeave : false, closeOnBlur: true});
+  $('#example-5 .ui-toggleslide').toggleslide({
+    toggleEvent: 'click',
+    closeOnLeave : false,
+    closeOnBlur: true
+  });
   </script>
   
   <div id="example-6" class="example">
-    <p>Don't fail me now.</p>
-    <div class="ui-toggleslide">
+    <div class="ui-toggleslide ui-right">
       <div class="ui-toggle">&#187;</div>
       <div class="ui-content">
         <img src="http://www.maxgladwell.com/wp-content/uploads/2008/12/twitter_fail_whale.png" alt="" />
@@ -134,7 +154,10 @@
     </div>
   </div>
   <script type="text/javascript" charset="utf-8">
-  $('#example-6 .ui-toggleslide').toggleslide({toggleEvent: 'click', direction: 'left'});
+  $('#example-6 .ui-toggleslide').toggleslide({
+    toggleEvent: 'click',
+    direction: 'left'
+  });
   </script>
 </div>
 

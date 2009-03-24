@@ -27,6 +27,7 @@ $.effects.slide2 = function(o) {
 		
 		// Animate
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+			el.show();
 			if(o.callback) o.callback.apply(this, arguments); // Callback
 			el.dequeue();
 		}});

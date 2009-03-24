@@ -2,12 +2,12 @@
 .ui-toggleslide {
   overflow: hidden;
 }
-.ui-toggleslide .ui-toggle,
-.ui-toggleslide .ui-content a {
+.ui-toggle,
+.ui-content a {
   height: 25px;
   line-height: 25px;
 }
-.ui-toggleslide .ui-toggle {
+.ui-toggle {
   display: block;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ccc;
@@ -20,7 +20,7 @@
   position: relative;
   z-index: 2;
 }
-.ui-toggleslide .ui-content {
+.ui-content {
   position: relative;
   z-index: 1;
 }
@@ -50,13 +50,16 @@ hr {
   margin: 0 0 15px 0;
 }
 
-#menu-examples .ui-toggleslide ul,
-#menu-examples .ui-toggleslide li {
+#menu-examples p {
+  width: 125px;
+}
+#menu-examples ul,
+#menu-examples li {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-#menu-examples .ui-toggleslide .ui-content a {
+#menu-examples .ui-content a {
   background-color: #fee;
   border-bottom: 1px solid #fff;
   display: block;
@@ -66,9 +69,27 @@ hr {
   text-decoration: none;
   padding: 0 5px;
 }
-#menu-examples .ui-toggleslide .ui-content a:hover {
+#menu-examples .ui-content a:hover {
   background-color: #333;
   color: #fff;
+}
+
+
+#example-4 .ui-toggle {
+  border-bottom: 0;
+  border-right: 1px solid #ccc;
+  width: 124px;
+  text-align: right;
+  float: left;
+}
+#example-4 .ui-content {
+  float: left;
+}
+#example-4 .ui-content li {
+  float: left;
+}
+#example-4 .ui-content li a {
+  display: block;
 }
 
 #example-6 .ui-toggle,
@@ -79,6 +100,8 @@ hr {
   width: 20px;
   height: 300px;
   text-align: center;
+  border-bottom: 0;
+  border-right: 1px solid #ccc;
 }
 
 /********* Hacks! **********/
