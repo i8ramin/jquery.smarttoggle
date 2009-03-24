@@ -44,9 +44,7 @@ hr {
   font-size: 12px;
   color: green;
   background-color: #cfe;
-  height: 75px;
   line-height: 18px;
-  width: 125px;
 }
 .example .ui-toggleslide {
   margin: 0 0 15px 0;
@@ -73,21 +71,15 @@ hr {
   color: #fff;
 }
 
-#other-examples p {
-  width: 398px;
-}
-
-/*
-#example-6 {
-  overflow: hidden;
-}
+#example-6 .ui-toggle,
 #example-6 .ui-content {
-  margin-top: -300px;
+  float: left;
 }
-#example-6 .open .ui-content {
-  margin-top: 0;
+#example-6 .ui-toggle {
+  width: 20px;
+  height: 300px;
+  text-align: center;
 }
-*/
 
 /********* Hacks! **********/
 
