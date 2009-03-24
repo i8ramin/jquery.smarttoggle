@@ -14,24 +14,19 @@ $.effects.slide2 = function(o) {
 	return this.queue(function() {
 
 		// Create element
-		var el = $(this), props = ['position','marginTop','marginLeft'];
-
-		// Set options
-		var mode = $.effects.setMode(el, o.options.mode || 'show'); // Set Mode
-		var direction = o.options.direction || 'left'; // Default Direction
-
-		el.show(); // Save & Show
-		var ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft';
-		var motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg';
-		var distance = o.options.distance || (ref == 'marginTop' ? el.outerHeight() : el.outerWidth());
-
-		// Animation
-		var animation = {};
+		var el = $(this),
+		    mode = $.effects.setMode(el, o.options.mode || 'show'),
+        direction = o.options.direction || 'left', // Default Direction
+        
+        ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft',
+        motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg',
+        distance = o.options.distance || (ref == 'marginTop' ? el.outerHeight() : el.outerWidth()),
+        animation = {}; // Animation
+        
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		
 		// Animate
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(mode == 'hide') el.hide(); // Hide
 			if(o.callback) o.callback.apply(this, arguments); // Callback
 			el.dequeue();
 		}});
