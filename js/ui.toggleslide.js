@@ -25,9 +25,11 @@ $.effects.slide2 = function(o) {
         
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		
+		if(mode == 'show') el.show();
+		
 		// Animate
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			el.show();
+			if(mode == 'hide') el.hide();
 			if(o.callback) o.callback.apply(this, arguments); // Callback
 			el.dequeue();
 		}});
@@ -43,14 +45,14 @@ var ToggleSlide = {
       this.element.addClass("ui-disabled");
       return false;
     }
-        
-    this._isBusy = false;
-    this._isOpen = options.hideOnLoad;
 
     this.uiToggle = $(options.toggle, this.element).disableSelection();
     this.uiContent = $(options.content, this.element);
-
-    if(options.hideOnLoad) {
+    
+    this._isBusy = false;
+    this._isOpen = options.closeOnLoad;
+    
+    if(options.closeOnLoad) {
       this._uiClose();
     }
     
@@ -139,7 +141,7 @@ $.ui.toggleslide.defaults = {
   content: '.ui-content',
   toggle: '.ui-toggle',
   toggleEvent: 'hover',
-  hideOnLoad: true,
+  closeOnLoad: true,
   closeOnLeave: true,
   closeOnBlur: false,
   closeDelay: 500,
