@@ -12,8 +12,6 @@
   
 $.effects.slide2 = function(o) {
 	return this.queue(function() {
-
-		// Create element
 		var el = $(this),
 		    mode = $.effects.setMode(el, o.options.mode || 'show'),
         direction = o.options.direction || 'left', // Default Direction
@@ -21,16 +19,13 @@ $.effects.slide2 = function(o) {
         ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft',
         motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg',
         distance = o.options.distance || (ref == 'marginTop' ? el.outerHeight() : el.outerWidth()),
-        animation = {}; // Animation
-        
+        animation = {};
+
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		
-		if(mode == 'show') el.show();
-		
-		// Animate
+		//if(mode == 'show') el.show();
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(mode == 'hide') el.hide();
-			if(o.callback) o.callback.apply(this, arguments); // Callback
+			if(o.callback) o.callback.apply(this, arguments);
 			el.dequeue();
 		}});
 	});
@@ -39,7 +34,9 @@ $.effects.slide2 = function(o) {
 var ToggleSlide = {
   _init: function() {
     var self = this,
-        options = this.options;
+        options = this.options,
+				direction = this.options.direction || 'up',
+				ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft';
 
     if(this.options.disabled) {
       this.element.addClass("ui-disabled");
@@ -50,11 +47,18 @@ var ToggleSlide = {
     this.uiContent = $(options.content, this.element);
     
     this._isBusy = false;
-    this._isOpen = options.closeOnLoad;
+    this._isOpen = options.closeOnLoad || !options.contentHidden;
     
     if(options.closeOnLoad) {
       this._uiClose();
     }
+
+		if(options.contentHidden) {
+			this.uiContent.css(
+				ref, -(ref == 'marginTop' ? this.uiContent.outerHeight() : this.uiContent.outerWidth())
+			);
+			this._isOpen = false;
+		}
     
     if(options.toggleEvent === 'hover') {
       this.uiToggle.bind('mouseover', function(e, data) {
@@ -141,9 +145,10 @@ $.ui.toggleslide.defaults = {
   content: '.ui-content',
   toggle: '.ui-toggle',
   toggleEvent: 'hover',
-  closeOnLoad: true,
+	contentHidden: true,
+  closeOnLoad: false,
   closeOnLeave: true,
-  closeOnBlur: false,
+  closeOnBlur: true,
   closeDelay: 500,
   direction: 'up',
   easing: 'swing',
