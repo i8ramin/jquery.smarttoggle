@@ -1,7 +1,7 @@
 /*
- * SlieMenu 1.0
- *
- * Copyright (c) 2009 Ramin Bozorgzadeh (http://www.getintothis.com)
+ * ToggleSlide 1.0
+ * (c) Copyright 2009 Ramin. All Rights Reserved.
+ * http://www.getintothis.com
  *
  * Depends:
  *  jquery-1.3.2.js
@@ -23,9 +23,8 @@ $.effects.slide2 = function(o) {
 
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		
-		//if(mode == 'show') el.show();
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(o.callback) o.callback.apply(this, arguments);
+			if(o.callback) { o.callback.apply(this, arguments); }
 			el.dequeue();
 		}});
 	});
@@ -66,14 +65,15 @@ var ToggleSlide = {
       });
     } else {        
       this.uiToggle.bind(options.toggleEvent, function(e, data) {
-          self._isOpen ? self._uiClose(e, data) : self._uiOpen(e, data);
+          if(self._isOpen) { self._uiClose(e, data); } else { self._uiOpen(e, data); }
       });
     }
     
     if(options.closeOnLeave || options.toggleEvent === 'hover') {
       this.element.hover(
         function(e, data) {
-          self.uiCloseTimeout && clearTimeout(self.uiCloseTimeout);
+					/*global clearTimeout */
+          if(self.uiCloseTimeout) { clearTimeout(self.uiCloseTimeout); }
         },
         function(e, data) {
           self._uiClose(e, data);
@@ -90,7 +90,7 @@ var ToggleSlide = {
     });
   },
   destroy: function() {
-    if(!this.element.data('toggleslide')) return;
+    if(!this.element.data('toggleslide')) { return; }
 		
     this.element
       .removeData("toggleslide")
@@ -99,17 +99,18 @@ var ToggleSlide = {
   _uiOpen: function(e, data) {
     var me = this, o = this.options;
     
-    if(me._isBusy || me._isOpen || o.disabled) return false;
+    if(me._isBusy || me._isOpen || o.disabled) { return false; }
     
     me._isBusy = true;
     me._trigger('openStart', e, me);
-
+		/*global setTimeout */
     me.uiOpenTimeout = setTimeout(function() {
       me.uiContent.show(o.effectType, { direction: o.direction, mode: 'show', easing: o.easing }, o.speed, function() {
         me._isOpen = !(me._isBusy = false);
         me._trigger('openStop', e, me);
          
         if(o.closeOnBlur) {
+					/*global document */
           $(document).bind('click.toggleslide', function(e, data) {
             $(this).unbind('click.toggleslide');
             me._uiClose(e, data);
@@ -120,7 +121,7 @@ var ToggleSlide = {
   },
   _uiClose: function(e, data) {
     var me = this, o = this.options;
-    
+    /*global setTimeout */
     me.uiCloseTimeout = setTimeout(function() {
       if(me._isOpen && !me._isBusy) {
         me._isBusy = true;
@@ -135,7 +136,7 @@ var ToggleSlide = {
   },
   _trigger: function(type, e, ui) {
 		return $.widget.prototype._trigger.call(this, type, e, ui);
-	},
+	}
 };
 
 
@@ -155,5 +156,5 @@ $.ui.toggleslide.defaults = {
   speed: 500,
   effectType: 'slide2'
 };
-
+/*global jQuery */
 })(jQuery);
