@@ -9,6 +9,9 @@
   <script src="js/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/ui.core.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/effects.core.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/effects.slide.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="js/effects.slide2.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/ui.toggleslide.js" type="text/javascript" charset="utf-8"></script>
   
   <link rel="stylesheet" type="text/css" href="css/ui.toggleslide.css" media="screen,projection" />
@@ -119,7 +122,7 @@
   $('#example-4 .ui-toggleslide').toggleslide({
     toggleEvent: 'click',
     direction: 'left',
-    easing: 'easeOutBounce',
+    easing: 'easeOutQuad',
     speed: 1000,
     closeOnLeave : false
   });
@@ -132,14 +135,12 @@
 	<div class="ui-toggleslide">
 		<div class="ui-toggle">&#187;</div>
 		<div class="ui-content">
-			Some text...
+			<p>Some text...</p>
 		</div>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
-$('#example-7 .ui-toggleslide').toggleslide({
-	toggleEvent: 'click'
-});
+$('#example-7 .ui-toggleslide').toggleslide();
 </script>
 
 <hr />
@@ -175,10 +176,16 @@ $('#example-6 .ui-toggleslide').toggleslide({
 });
 </script>
 
-<hr />
+
 
 <script type="text/javascript" charset="utf-8">
 $('.ui-toggleslide').find('a').click(function() {return false;});
+$('h1').before('<p>browser: ' + navigator.userAgent + '</p>');
+
+$('#example-7 .ui-toggleslide').mousenear(function() {
+	$(this).trigger('open.toggleslide');
+});
+
 </script>
 
 </body>

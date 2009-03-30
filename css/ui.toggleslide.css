@@ -1,6 +1,6 @@
 /*** widget css ***/
 .ui-toggleslide {
-	overflow: hidden;
+	font-family: arial, verdana, sans-serif;
 }
 .ui-toggle,
 .ui-content a {
@@ -34,9 +34,10 @@ hr {
 	border: 0;
 	border-bottom: 1px solid #ccc;
 }
-
+.example {
+	margin-bottom: 10px;
+}
 #menu-examples .example {
-	font-family: arial, verdana, sans-serif;
 	position: relative;
 	float: left;
 	margin-right: 10px;
@@ -46,16 +47,9 @@ hr {
 	padding: 5px;
 	font-size: 12px;
 	color: green;
-	background-color: #cfe;
 	line-height: 18px;
 }
-.example .ui-toggleslide {
-	margin: 0 0 15px 0;
-}
 
-#menu-examples p {
-	width: 125px;
-}
 #menu-examples ul,
 #menu-examples li {
 	list-style-type: none;
@@ -77,11 +71,19 @@ hr {
 	color: #fff;
 }
 
+#example-1 a,
+#example-1 .ui-toggle,
+#example-2 a,
+#example-2 .ui-toggle,
+#example-3 a,
+#example-3 .ui-toggle {
+	width: 130px;
+}
 
 #example-4 .ui-toggle {
 	border-bottom: 0;
 	border-right: 1px solid #ccc;
-	width: 124px;
+	width: 130px;
 	text-align: right;
 	float: left;
 }
@@ -94,6 +96,8 @@ hr {
 #example-4 .ui-content li a {
 	display: block;
 }
+
+
 #example-5 .ui-toggleslide {
 	width: 408px;
 }
@@ -113,6 +117,7 @@ hr {
 	background-color: #333;
 	color: #fff;
 	padding: 5px;
+	height: 100px;
 }
 
 /********* Hacks! **********/
@@ -124,15 +129,8 @@ hr {
 	clear: both;
 	visibility: hidden;
 }
-.clearfix {
-	display: inline-block;
-}
+.clearfix { display: inline-block; }
 /* Hides from IE-mac \*/
-* html .clearfix {
-	height: 1%;
-}
-.clearfix {
-	display: block;
-}
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
 /* End hide from IE-mac */
-}

@@ -9,26 +9,6 @@
  *  effects.core.js
  */
 (function($) {
-  
-$.effects.slide2 = function(o) {
-	return this.queue(function() {
-		var el = $(this),
-		    mode = $.effects.setMode(el, o.options.mode || 'show'),
-        direction = o.options.direction || 'left', // Default Direction
-        
-        ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft',
-        motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg',
-        distance = o.options.distance || (ref == 'marginTop' ? el.outerHeight() : el.outerWidth()),
-        animation = {};
-
-		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
-		
-		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(o.callback) { o.callback.apply(this, arguments); }
-			el.dequeue();
-		}});
-	});
-};
 
 var ToggleSlide = {
   _init: function() {
@@ -38,7 +18,7 @@ var ToggleSlide = {
 				ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft';
 
     if(this.options.disabled) {
-      this.element.addClass("ui-disabled");
+      this.element.addClass('ui-disabled');
       return false;
     }
 
@@ -47,16 +27,21 @@ var ToggleSlide = {
     
     this._isBusy = false;
     this._isOpen = options.closeOnLoad || !options.contentHidden;
+
+		this.element.css({overflow: 'hidden'});
     
     if(options.closeOnLoad) {
       this._uiClose();
-    }
-
-		if(options.contentHidden) {
-			this.uiContent.css(
-				ref, -(ref == 'marginTop' ? this.uiContent.outerHeight() : this.uiContent.outerWidth())
-			);
-			this._isOpen = false;
+    } else {
+			if(options.contentHidden) {
+				if(options.effectType == 'slide2') {
+					this.uiContent.css(
+						ref, -(ref == 'marginTop' ? this.uiContent.outerHeight() : this.uiContent.outerWidth())
+					);
+				}
+				this.uiContent.hide();
+				this._isOpen = false;
+			}
 		}
     
     if(options.toggleEvent === 'hover') {
@@ -148,13 +133,46 @@ $.ui.toggleslide.defaults = {
   toggleEvent: 'hover',
 	contentHidden: true,
   closeOnLoad: false,
-  closeOnLeave: true,
-  closeOnBlur: true,
+  closeOnLeave: false,
+  closeOnBlur: false,
   closeDelay: 500,
   direction: 'up',
   easing: 'swing',
   speed: 500,
   effectType: 'slide2'
 };
+
+jQuery.fn.extend({
+	mousenear: function(fn) {
+		var clientX, clientY, pageX, pageY,
+				proximity = 30;
+		
+		return this.each(function() {
+			var self = $(this),
+
+					topTrigger = Math.round(self.offset().top),
+					rightTrigger = Math.round(self.offset().left + self.outerWidth()),
+					bottomTrigger = Math.round(self.offset().top + self.outerHeight()),
+					leftTrigger = Math.round(self.offset().left);
+					
+			$(document).bind('mousemove', function(e) {
+				clientX = e.clientX;
+				clientY = e.clientY;
+				pageX = e.pageX;
+				pageY = e.pageY;
+				
+				topTrigger = Math.round(self.offset().top);
+				rightTrigger = Math.round(self.offset().left + self.outerWidth());
+				bottomTrigger = Math.round(self.offset().top + self.outerHeight());
+				leftTrigger = Math.round(self.offset().left);
+
+				if(pageY <= bottomTrigger + proximity && pageY > bottomTrigger) {
+					fn.apply(self);
+				}
+			});
+		});
+	}
+});
+
 /*global jQuery */
 })(jQuery);
