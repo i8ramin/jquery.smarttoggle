@@ -113,6 +113,11 @@ hr {
 	border-right: 1px solid #ccc;
 }
 
+#example-7 {
+	width: 65%;
+	margin-right: auto;
+	margin-left: auto;
+}
 #example-7 .ui-content {
 	background-color: #333;
 	color: #fff;

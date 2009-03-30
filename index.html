@@ -171,7 +171,6 @@ $('#example-5 .ui-toggleslide').toggleslide({
 </div>
 <script type="text/javascript" charset="utf-8">
 $('#example-6 .ui-toggleslide').toggleslide({
-	toggleEvent: 'click',
 	direction: 'left'
 });
 </script>
@@ -182,8 +181,13 @@ $('#example-6 .ui-toggleslide').toggleslide({
 $('.ui-toggleslide').find('a').click(function() {return false;});
 $('h1').before('<p>browser: ' + navigator.userAgent + '</p>');
 
-$('#example-7 .ui-toggleslide').mousenear(function() {
-	$(this).trigger('open.toggleslide');
+$('#example-6 .ui-toggle').mousenear({
+	trigger: {
+		right: true
+	},
+	callback: function() {
+		$(this).trigger('open.toggleslide');
+	}
 });
 
 </script>
