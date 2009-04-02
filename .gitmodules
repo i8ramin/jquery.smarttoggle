@@ -1,0 +1,3 @@
+[submodule "js/mousenear"]
+	path = js/mousenear
+	url = git@github.com:i8ramin/events.mousenear.git
