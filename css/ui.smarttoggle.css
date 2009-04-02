@@ -1,0 +1,145 @@
+/*** widget css ***/
+.ui-smarttoggle {
+	font-family: arial, verdana, sans-serif;
+}
+.ui-toggle,
+.ui-content a {
+	height: 25px;
+	line-height: 25px;
+}
+.ui-toggle {
+	display: block;
+	background-color: #f7f7f7;
+	border-bottom: 1px solid #ccc;
+	color: #666;
+	padding: 0 5px;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: hand;
+	cursor: pointer;
+	position: relative;
+	z-index: 2;
+}
+.ui-content {
+	position: relative;
+	z-index: 1;
+}
+
+
+/*** examples css ***/
+
+hr {
+	clear: left;
+	height: 1px;
+	border: 0;
+	border-bottom: 1px solid #ccc;
+}
+.example {
+	margin-bottom: 10px;
+}
+#menu-examples .example {
+	position: relative;
+	float: left;
+	margin-right: 10px;
+}
+#menu-examples .example p {
+	margin: 0;
+	padding: 5px;
+	font-size: 12px;
+	color: green;
+	line-height: 18px;
+}
+
+#menu-examples ul,
+#menu-examples li {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+#menu-examples .ui-content a {
+	background-color: #fee;
+	border-bottom: 1px solid #fff;
+	display: block;
+	font-size: 14px;
+	font-weight: normal;
+	color: #f90;
+	text-decoration: none;
+	padding: 0 5px;
+}
+#menu-examples .ui-content a:hover {
+	background-color: #333;
+	color: #fff;
+}
+
+#example-1 a,
+#example-1 .ui-toggle,
+#example-2 a,
+#example-2 .ui-toggle,
+#example-3 a,
+#example-3 .ui-toggle {
+	width: 130px;
+}
+
+#example-4 .ui-toggle {
+	border-bottom: 0;
+	border-right: 1px solid #ccc;
+	width: 130px;
+	text-align: right;
+	float: left;
+}
+#example-4 .ui-content {
+	float: left;
+}
+#example-4 .ui-content li {
+	float: left;
+}
+#example-4 .ui-content li a {
+	display: block;
+}
+
+
+#example-5 .ui-smarttoggle {
+	width: 408px;
+}
+
+#example-6 .ui-smarttoggle {
+	width: 431px;
+}
+#example-6 .ui-toggle,
+#example-6 .ui-content {
+	float: left;
+}
+#example-6 .ui-toggle {
+	width: 20px;
+	height: 300px;
+	text-align: center;
+	border-bottom: 0;
+	border-right: 1px solid #ccc;
+}
+
+#example-7 {
+	width: 65%;
+	margin-right: auto;
+	margin-left: auto;
+}
+#example-7 .ui-content {
+	background-color: #333;
+	color: #fff;
+	padding: 5px;
+	height: 100px;
+}
+
+/********* Hacks! **********/
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix { display: inline-block; }
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* End hide from IE-mac */
