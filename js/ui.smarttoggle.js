@@ -10,7 +10,7 @@
  */
 (function($) {
 
-var ToggleSlide = {
+var SmartToggle = {
   _init: function() {
     var self = this,
         options = this.options,
@@ -68,11 +68,11 @@ var ToggleSlide = {
       );
     }
     
-    this.element.bind('open.toggleslide', function(e, data) {
+    this.element.bind('open.smarttoggle', function(e, data) {
       self._uiOpen(e, data);
     });
     
-    this.element.bind('close.toggleslide', function(e, data) {
+    this.element.bind('close.smarttoggle', function(e, data) {
       self._uiClose(e, data);
     });
   },
@@ -91,8 +91,8 @@ var ToggleSlide = {
          
         if(o.closeOnBlur) {
 					/*global document */
-          $(document).bind('click.toggleslide', function(e, data) {
-            $(this).unbind('click.toggleslide');
+          $(document).bind('click.smarttoggle', function(e, data) {
+            $(this).unbind('click.smarttoggle');
             me._uiClose(e, data);
           });
         }
@@ -120,9 +120,9 @@ var ToggleSlide = {
 };
 
 
-$.widget("ui.toggleslide", ToggleSlide);
-$.ui.toggleslide.defaults = {
-  wrapper: '.ui-toggleslide',
+$.widget("ui.smarttoggle", SmartToggle);
+$.ui.smarttoggle.defaults = {
+  wrapper: '.ui-smarttoggle',
   content: '.ui-content',
   toggle: '.ui-toggle',
   toggleEvent: 'hover',
