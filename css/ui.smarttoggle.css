@@ -1,5 +1,5 @@
 /*** widget css ***/
-.ui-toggleslide {
+.ui-smarttoggle {
 	font-family: arial, verdana, sans-serif;
 }
 .ui-toggle,
@@ -98,11 +98,11 @@ hr {
 }
 
 
-#example-5 .ui-toggleslide {
+#example-5 .ui-smarttoggle {
 	width: 408px;
 }
 
-#example-6 .ui-toggleslide {
+#example-6 .ui-smarttoggle {
 	width: 431px;
 }
 #example-6 .ui-toggle,

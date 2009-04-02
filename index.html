@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head profile="http://gmpg.org/xfn/11">
-  <title>ui.smarttoggle examples</title>
+  <title>Smart Toggle examples</title>
   
   <script src="js/development-bundle/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/development-bundle/ui/ui.core.js" type="text/javascript" charset="utf-8"></script>
@@ -131,7 +131,8 @@
     direction: 'left',
     easing: 'easeOutQuad',
     speed: 1000,
-    closeOnLeave : false
+    closeOnLeave : false,
+		closeOnBlur: true
   });
   </script>
 </div>
@@ -147,7 +148,7 @@
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
-$('#example-7 .ui-smarttoggle').smarttoggle();
+$('#example-7 .ui-smarttoggle').smarttoggle({toggleEvent: 'dblclick'});
 </script>
 
 <hr />
