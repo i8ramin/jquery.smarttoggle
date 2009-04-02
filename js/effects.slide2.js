@@ -19,20 +19,21 @@
 $.effects.slide2 = function(o) {
 	return this.queue(function() {
 		var el = $(this),
-				props = ['position','top','left','width','height'],
+				props = ['position','height','width'],
+				vAttr = 'marginTop',
+				hAttr = 'marginLeft',
 		    mode = $.effects.setMode(el, o.options.mode || 'show'),
         direction = o.options.direction || 'left',
-        ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft',
+        ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr,
 				motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg',
-        distance = o.options.distance || (ref == 'marginTop' ? el.outerHeight() : el.outerWidth()),
+        distance = o.options.distance || (ref == vAttr ? el.outerHeight() : el.outerWidth()),
         animation = {};
 
-		$.effects.save(el, props);
-		el.show();
-
+		//$.effects.save(el, props);
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
-		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+		el.show().animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') { el.hide(); }
+			//$.effects.restore(el, props);
 			if(o.callback) { o.callback.apply(this, arguments); }
 			el.dequeue();
 		}});

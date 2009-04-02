@@ -101,6 +101,10 @@ hr {
 #example-5 .ui-toggleslide {
 	width: 408px;
 }
+
+#example-6 .ui-toggleslide {
+	width: 431px;
+}
 #example-6 .ui-toggle,
 #example-6 .ui-content {
 	float: left;

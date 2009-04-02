@@ -14,8 +14,10 @@ var ToggleSlide = {
   _init: function() {
     var self = this,
         options = this.options,
+				vAttr = 'marginTop',
+				hAttr = 'marginLeft',
 				direction = this.options.direction || 'up',
-				ref = (direction == 'up' || direction == 'down') ? 'marginTop' : 'marginLeft';
+				ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr;
 
     if(this.options.disabled) {
       this.element.addClass('ui-disabled');
@@ -36,7 +38,7 @@ var ToggleSlide = {
 			if(options.contentHidden) {
 				if(options.effectType == 'slide2') {
 					this.uiContent.css(
-						ref, -(ref == 'marginTop' ? this.uiContent.outerHeight() : this.uiContent.outerWidth())
+						ref, -(ref == vAttr ? this.uiContent.outerHeight() : this.uiContent.outerWidth())
 					);
 				}
 				this.uiContent.hide();
@@ -73,13 +75,6 @@ var ToggleSlide = {
     this.element.bind('close.toggleslide', function(e, data) {
       self._uiClose(e, data);
     });
-  },
-  destroy: function() {
-    if(!this.element.data('toggleslide')) { return; }
-		
-    this.element
-      .removeData("toggleslide")
-      .unbind(".toggleslide");
   },
   _uiOpen: function(e, data) {
     var me = this, o = this.options;
@@ -140,80 +135,6 @@ $.ui.toggleslide.defaults = {
   easing: 'swing',
   speed: 500,
   effectType: 'slide2'
-};
-
-$.fn.mousenear = function(settings) {
-	settings = $.extend({
-		trigger: {
-			top: false,
-			right: false,
-			bottom: false,
-			left: false
-		},
-		proximity: 50,
-		debug: true
-	}, settings || {});
-
-	return this.each(function() {
-		var self = $(this),
-				clientX, clientY, pageX, pageY,
-				topTrigger, rightTrigger, bottomTrigger, leftTrigger;
-				
-		if(settings.debug) {
-			var debugObjects = {};
-			$.each(settings.trigger, function(k, v) {
-				if(v) {
-					var w = k == 'top' || k == 'bottom' ? self.outerWidth() : settings.proximity,
-							h = k == 'left' || k == 'right' ? self.outerHeight() : settings.proximity;
-							
-					debugObjects[k] = $('#proximityHelper-' + k).length ? $('#proximityHelper-' + k) : $('<div id="proximityHelper-' + k + '">').css({
-						position: 'absolute',
-						width: w,
-						height: h,
-						zIndex: 999,
-						backgroundColor: 'red',
-						opacity: 0.25
-					}).appendTo('body');
-				}
-			});
-		}
-		
-		$(document).bind('mousemove', function(e) {
-			clientX = e.clientX; clientY = e.clientY;
-			pageX = e.pageX; pageY = e.pageY;
-	
-			topTrigger = Math.round(self.offset().top);
-			rightTrigger = Math.round(self.offset().left) + self.outerWidth();
-			bottomTrigger = Math.round(self.offset().top) + self.outerHeight();
-			leftTrigger = Math.round(self.offset().left);
-	
-			var hotspots = { 
-				top: pageY > (topTrigger - settings.proximity) && pageY <= topTrigger && pageX >= leftTrigger && pageX <= rightTrigger,
-				right: pageX <= (rightTrigger + settings.proximity) && pageX > rightTrigger && pageY >= topTrigger && pageY <= bottomTrigger,
-				bottom: pageY <= (bottomTrigger + settings.proximity) && pageY > bottomTrigger && pageX >= leftTrigger && pageX <= rightTrigger,
-				left: pageX > (leftTrigger - settings.proximity) && pageX <= leftTrigger && pageY >= topTrigger && pageY <= bottomTrigger
-			};
-			
-			$.each(settings.trigger, function(k, v) {
-				if(settings.trigger[k] && hotspots[k]) {
-					settings.callback.apply(self);
-					return false;
-				}
-			});
-			
-			if(settings.debug) {
-				$.each(debugObjects, function(k, v) {
-					var top = (k == 'bottom') ? bottomTrigger : (k == 'left' || k == 'right') ? topTrigger : topTrigger - settings.proximity,
-							left = (k == 'top' || k == 'bottom') ? leftTrigger : (k == 'left') ? leftTrigger - settings.proximity : rightTrigger;
-
-					$('#proximityHelper-' + k).css({
-						top: top,
-						left: left
-					});
-				});
-			}
-		});
-	});
 };
 
 /*global jQuery */
