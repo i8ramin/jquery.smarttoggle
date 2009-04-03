@@ -73,7 +73,7 @@
   </div>
   <script type="text/javascript" charset="utf-8">
   $('#example-2 .ui-smarttoggle').smarttoggle({
-    toggleEvent: 'click',
+    openOnEnter: false,
 		direction: 'up'
   });
   </script>
@@ -99,7 +99,7 @@
   </div>
   <script type="text/javascript" charset="utf-8">
   $('#example-3 .ui-smarttoggle').smarttoggle({
-    toggleEvent: 'click',
+    openOnEnter: false,
     closeOnLeave : false,
 		closeOnBlur: false
   });
@@ -126,7 +126,7 @@
   </div>
   <script type="text/javascript" charset="utf-8">
   $('#example-4 .ui-smarttoggle').smarttoggle({
-    toggleEvent: 'click',
+    openOnEnter: false,
     direction: 'left',
     easing: 'easeOutBounce',
     speed: 1000
@@ -160,7 +160,7 @@ $('#example-7 .ui-smarttoggle').smarttoggle({toggleEvent: 'dblclick'});
 </div>
 <script type="text/javascript" charset="utf-8">
 $('#example-5 .ui-smarttoggle').smarttoggle({
-	toggleEvent: 'click',
+	openOnEnter: false,
 	closeOnLeave : false
 });
 </script>
@@ -180,9 +180,10 @@ $('#example-5 .ui-smarttoggle').smarttoggle({
 <script type="text/javascript" charset="utf-8">
 $('#example-6 .ui-smarttoggle').smarttoggle({
 	direction: 'left',
-	adjustToggleHeight: true,
 	easing: 'easeOutBounce'
-});
+}).find('.ui-toggle').mousenear(function() {
+		$(this).parent().trigger('open.smarttoggle');
+}, { trigger: 'right' });
 </script>
 
 
@@ -190,11 +191,6 @@ $('#example-6 .ui-smarttoggle').smarttoggle({
 <script type="text/javascript" charset="utf-8">
 $('.ui-smarttoggle').find('a').click(function() {return false;});
 $('h1').before('<p>browser: ' + navigator.userAgent + '</p>');
-
-$('#example-6 .ui-toggle').mousenear(function() {
-	$(this).trigger('open.smarttoggle');
-}, {trigger: 'right'});
-
 </script>
 
 </body>

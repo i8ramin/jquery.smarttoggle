@@ -27,7 +27,11 @@ var SmartToggle = {
     this._isBusy = false;
     this._isOpen = options.closeOnLoad || !options.contentHidden;
 
-		if(options.adjustToggleHeight) {
+		this.uiToggle.bind('click', function(e, data) {
+			if(self._isOpen) { self._uiClose(e, data); } else { self._uiOpen(e, data); }
+		});
+
+		if((direction == 'left' || direction == 'right') && options.adjustToggleHeight) {
 			this.uiToggle.height(this.element.outerHeight());
 		}
 
@@ -44,18 +48,14 @@ var SmartToggle = {
 				this._isOpen = false;
 			}
 		}
-    
-    if(options.toggleEvent === 'hover') {
+
+    if(options.openOnEnter) {
       this.uiToggle.bind('mouseover', function(e, data) {
         self._uiOpen(e, data);
       });
-    } else {        
-      this.uiToggle.bind(options.toggleEvent, function(e, data) {
-          if(self._isOpen) { self._uiClose(e, data); } else { self._uiOpen(e, data); }
-      });
     }
     
-    if(options.closeOnLeave || options.toggleEvent === 'hover') {
+    if(options.closeOnLeave) {
       this.uiToggle.add(this.uiContent).hover(
         function(e, data) {
 					/*global clearTimeout */
@@ -91,6 +91,7 @@ var SmartToggle = {
         if(o.closeOnBlur) {
 					/*global document */
           $(document).bind('click.smarttoggle', function(e, data) {
+						if(e.originalTarget == me.uiToggle[0]) { return false; }
             $(this).unbind('click.smarttoggle');
             me._uiClose(e, data);
           });
@@ -124,13 +125,13 @@ $.ui.smarttoggle.defaults = {
   wrapper: '.ui-smarttoggle',
   content: '.ui-content',
   toggle: '.ui-toggle',
-  toggleEvent: 'hover',
-	adjustToggleHeight: false,
 	contentHidden: true,
+  openOnEnter: true,
   closeOnLoad: false,
   closeOnLeave: true,
   closeOnBlur: true,
   closeDelay: 500,
+	adjustToggleHeight: true,
   direction: 'up',
   easing: 'swing',
   speed: 500,
