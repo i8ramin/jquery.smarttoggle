@@ -1,7 +1,7 @@
 /*
  * Slide 2
  * Based on the original effects.slide code, but with slight modifications
- * to slide in the given element using CSS margin values as opposed to top/left.
+ * to slide so that it uses CSS margin values as opposed to top/left.
  * This version also does not have a "wrapper" so the sliding effect will move the
  * elements below or next to it as it animates, as opposed to "shifting" them and
  * then animating. One caveat is that this doesn't work very well in IE since IE
@@ -17,23 +17,29 @@
 (function($) {
 
 $.effects.slide2 = function(o) {
+	o.options = $.extend({
+		mode: 'show',
+		easing: 'swing',
+		direction: 'left'
+	}, o.options || {});
+	
 	return this.queue(function() {
 		var el = $(this),
-				props = ['position','height','width'],
 				vAttr = 'marginTop',
 				hAttr = 'marginLeft',
-		    mode = $.effects.setMode(el, o.options.mode || 'show'),
-        direction = o.options.direction || 'left',
+		    mode = $.effects.setMode(el, o.options.mode),
+        direction = o.options.direction,
         ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr,
 				motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg',
         distance = o.options.distance || (ref == vAttr ? el.outerHeight() : el.outerWidth()),
+				overflowEl = o.options.overflowEl || el.parent(),
         animation = {};
 
-		//$.effects.save(el, props);
+		$(overflowEl).css({overflow: 'hidden'});
+
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		el.show().animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') { el.hide(); }
-			//$.effects.restore(el, props);
 			if(o.callback) { o.callback.apply(this, arguments); }
 			el.dequeue();
 		}});

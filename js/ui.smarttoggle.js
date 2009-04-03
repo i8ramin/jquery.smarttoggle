@@ -19,10 +19,7 @@ var SmartToggle = {
 				direction = this.options.direction || 'up',
 				ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr;
 
-    if(this.options.disabled) {
-      this.element.addClass('ui-disabled');
-      return false;
-    }
+		$(this.element).css({overflow: 'hidden'});
 
     this.uiToggle = $(options.toggle, this.element).disableSelection();
     this.uiContent = $(options.content, this.element);
@@ -30,8 +27,10 @@ var SmartToggle = {
     this._isBusy = false;
     this._isOpen = options.closeOnLoad || !options.contentHidden;
 
-		this.element.css({overflow: 'hidden'});
-    
+		if(options.adjustToggleHeight) {
+			this.uiToggle.height(this.element.outerHeight());
+		}
+
     if(options.closeOnLoad) {
       this._uiClose();
     } else {
@@ -57,7 +56,7 @@ var SmartToggle = {
     }
     
     if(options.closeOnLeave || options.toggleEvent === 'hover') {
-      this.element.hover(
+      this.uiToggle.add(this.uiContent).hover(
         function(e, data) {
 					/*global clearTimeout */
           if(self.uiCloseTimeout) { clearTimeout(self.uiCloseTimeout); }
@@ -126,16 +125,18 @@ $.ui.smarttoggle.defaults = {
   content: '.ui-content',
   toggle: '.ui-toggle',
   toggleEvent: 'hover',
+	adjustToggleHeight: false,
 	contentHidden: true,
   closeOnLoad: false,
-  closeOnLeave: false,
-  closeOnBlur: false,
+  closeOnLeave: true,
+  closeOnBlur: true,
   closeDelay: 500,
   direction: 'up',
   easing: 'swing',
   speed: 500,
   effectType: 'slide2'
 };
+
 
 /*global jQuery */
 })(jQuery);

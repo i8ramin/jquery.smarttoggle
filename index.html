@@ -74,7 +74,6 @@
   <script type="text/javascript" charset="utf-8">
   $('#example-2 .ui-smarttoggle').smarttoggle({
     toggleEvent: 'click',
-		effectType: 'drop',
 		direction: 'up'
   });
   </script>
@@ -129,10 +128,8 @@
   $('#example-4 .ui-smarttoggle').smarttoggle({
     toggleEvent: 'click',
     direction: 'left',
-    easing: 'easeOutQuad',
-    speed: 1000,
-    closeOnLeave : false,
-		closeOnBlur: true
+    easing: 'easeOutBounce',
+    speed: 1000
   });
   </script>
 </div>
@@ -164,23 +161,27 @@ $('#example-7 .ui-smarttoggle').smarttoggle({toggleEvent: 'dblclick'});
 <script type="text/javascript" charset="utf-8">
 $('#example-5 .ui-smarttoggle').smarttoggle({
 	toggleEvent: 'click',
-	closeOnLeave : false,
-	closeOnBlur: true
+	closeOnLeave : false
 });
 </script>
 
 <div id="example-6" class="example">
 	<div class="ui-smarttoggle">
 		<div class="ui-toggle">&#187;</div>
-		<div class="ui-content">
-			<img src="http://www.maxgladwell.com/wp-content/uploads/2008/12/twitter_fail_whale.png" width="400" height="300" alt="" />
-		</div>
+		<ul class="ui-content">
+			<!--img src="http://www.maxgladwell.com/wp-content/uploads/2008/12/twitter_fail_whale.png" width="400" height="300" alt="" /-->
+			<li class="first"><a href="">Photos</a></li>
+			<li><a href="">Documents</a></li>
+			<li><a href="">Music</a></li>
+			<li class="last"><a href="">Movies</a></li>
+		</ul>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
 $('#example-6 .ui-smarttoggle').smarttoggle({
 	direction: 'left',
-	closeOnLeave: true
+	adjustToggleHeight: true,
+	easing: 'easeOutBounce'
 });
 </script>
 

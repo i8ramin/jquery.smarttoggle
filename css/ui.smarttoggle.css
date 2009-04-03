@@ -103,18 +103,47 @@ hr {
 }
 
 #example-6 .ui-smarttoggle {
-	width: 431px;
 }
 #example-6 .ui-toggle,
 #example-6 .ui-content {
 	float: left;
 }
 #example-6 .ui-toggle {
-	width: 20px;
-	height: 300px;
+	width: 10px;
 	text-align: center;
 	border-bottom: 0;
 	border-right: 1px solid #ccc;
+	background-color: #000;
+	color: #999;
+}
+#example-6 .ui-content {
+}
+#example-6 ul,
+#example-6 li {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+#example-6 li a {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 20px 0 10px;
+	background-color: #333;
+	color: #eee;
+	border-bottom: 1px solid #eee;
+	text-decoration: none;
+}
+#example-6 li a:hover {
+	background-color: #69c;
+	color: #000;
+}
+#example-6 li.first a {
+	-moz-border-radius: 0 .4em 0 0;
+}
+#example-6 li.last a {
+	-moz-border-radius: 0 0 .4em 0;
+	border-bottom: 0;
 }
 
 #example-7 {
