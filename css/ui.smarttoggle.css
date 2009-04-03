@@ -112,7 +112,7 @@ hr {
 	width: 10px;
 	text-align: center;
 	border-bottom: 0;
-	border-right: 1px solid #ccc;
+	border-right: 0;
 	background-color: #000;
 	color: #999;
 }
@@ -129,9 +129,9 @@ hr {
 	height: 50px;
 	line-height: 50px;
 	padding: 0 20px 0 10px;
-	background-color: #333;
+	background-color: #000;
 	color: #eee;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #333;
 	text-decoration: none;
 }
 #example-6 li a:hover {
@@ -139,10 +139,14 @@ hr {
 	color: #000;
 }
 #example-6 li.first a {
-	-moz-border-radius: 0 .4em 0 0;
+	-moz-border-radius: 0 4px 0 0;
+	-webkit-border-radius: 0 4px 0 0;
+	border-radius: 0 4px 0 0;
 }
 #example-6 li.last a {
-	-moz-border-radius: 0 0 .4em 0;
+	-moz-border-radius: 0 0 4px 0;
+	-webkit-border-radius: 0 0 4px 0;
+	border-radius: 0 0 4px 0;
 	border-bottom: 0;
 }
 
