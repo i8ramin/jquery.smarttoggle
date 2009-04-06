@@ -140,12 +140,14 @@
 	<div class="ui-smarttoggle">
 		<div class="ui-toggle">&#187;</div>
 		<div class="ui-content">
-			<p>Some text...</p>
+			<p>Some text... <a href="#" class="ui-close">close</a></p>
 		</div>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
-$('#example-7 .ui-smarttoggle').smarttoggle({toggleEvent: 'dblclick'});
+$('#example-7 .ui-smarttoggle').smarttoggle({
+	toggle: '.ui-toggle, .ui-close'
+});
 </script>
 
 <hr />
@@ -181,9 +183,11 @@ $('#example-5 .ui-smarttoggle').smarttoggle({
 $('#example-6 .ui-smarttoggle').smarttoggle({
 	direction: 'left',
 	easing: 'easeOutBounce'
-}).find('.ui-toggle').mousenear(function() {
-		$(this).parent().trigger('open.smarttoggle');
-}, { trigger: 'right' });
+});
+
+$('#example-6 .ui-toggle').bind('mousenear', { trigger: 'right' }, function() {
+	$(this).parent().trigger('open.smarttoggle');
+});
 </script>
 
 
