@@ -141,12 +141,15 @@
 		<div class="ui-toggle">&#187;</div>
 		<div class="ui-content">
 			<p>Some text... <a href="#" class="ui-close">close</a></p>
+			<p><a href="http://www.yahoo.com">Yahoo</a></p>
 		</div>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
 $('#example-7 .ui-smarttoggle').smarttoggle({
-	toggle: '.ui-toggle, .ui-close'
+	toggle: '.ui-toggle, .ui-close',
+	closeOnLeave: false,
+	openOnEnter: false
 });
 </script>
 
@@ -171,7 +174,6 @@ $('#example-5 .ui-smarttoggle').smarttoggle({
 	<div class="ui-smarttoggle">
 		<div class="ui-toggle">&#187;</div>
 		<ul class="ui-content">
-			<!--img src="http://www.maxgladwell.com/wp-content/uploads/2008/12/twitter_fail_whale.png" width="400" height="300" alt="" /-->
 			<li class="first"><a href="">Photos</a></li>
 			<li><a href="">Documents</a></li>
 			<li><a href="">Music</a></li>
@@ -193,7 +195,7 @@ $('#example-6 .ui-toggle').bind('mousenear', { trigger: 'right', directional: tr
 
 
 <script type="text/javascript" charset="utf-8">
-$('.ui-smarttoggle').find('a').click(function() {return false;});
+$('#menu-examples .ui-smarttoggle li a').click(function() {return false;});
 $('h1').before('<p>browser: ' + navigator.userAgent + '</p>');
 </script>
 

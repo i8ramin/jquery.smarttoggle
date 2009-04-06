@@ -9,7 +9,8 @@
  *  effects.core.js
  */
 (function($) {
-/*global jQuery, document, setTimeout */
+/*global jQuery, document, setTimeout, clearTimeout */
+
 var SmartToggle = {
   _init: function() {
     var self = this,
@@ -58,7 +59,6 @@ var SmartToggle = {
     if(options.closeOnLeave) {
       this.uiToggle.add(this.uiContent).hover(
         function(e, data) {
-					/*global clearTimeout */
           if(self.uiCloseTimeout) { clearTimeout(self.uiCloseTimeout); }
         },
         function(e, data) {
@@ -89,7 +89,7 @@ var SmartToggle = {
          
         if(o.closeOnBlur) {
           $(document).bind('click.smarttoggle', function(e, data) {
-						if(e.originalTarget == me.uiToggle[0]) { return false; }
+						if($.inArray(me.element[0], $.makeArray($(e.target).parents())) != -1) { return; }
             $(this).unbind('click.smarttoggle');
             me._uiClose(e, data);
           });
