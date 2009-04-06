@@ -185,7 +185,7 @@ $('#example-6 .ui-smarttoggle').smarttoggle({
 	easing: 'easeOutBounce'
 });
 
-$('#example-6 .ui-toggle').bind('mousenear', { trigger: 'right' }, function() {
+$('#example-6 .ui-toggle').bind('mousenear', { trigger: 'right', directional: true }, function() {
 	$(this).parent().trigger('open.smarttoggle');
 });
 </script>

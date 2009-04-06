@@ -9,7 +9,7 @@
  *  effects.core.js
  */
 (function($) {
-
+/*global jQuery, document, setTimeout */
 var SmartToggle = {
   _init: function() {
     var self = this,
@@ -82,14 +82,12 @@ var SmartToggle = {
     
     me._isBusy = true;
     me._trigger('openStart', e, me);
-		/*global setTimeout */
     me.uiOpenTimeout = setTimeout(function() {
       me.uiContent.show(o.effectType, { direction: o.direction, mode: 'show', easing: o.easing }, o.speed, function() {
         me._isOpen = !(me._isBusy = false);
         me._trigger('openStop', e, me);
          
         if(o.closeOnBlur) {
-					/*global document */
           $(document).bind('click.smarttoggle', function(e, data) {
 						if(e.originalTarget == me.uiToggle[0]) { return false; }
             $(this).unbind('click.smarttoggle');
@@ -101,7 +99,6 @@ var SmartToggle = {
   },
   _uiClose: function(e, data) {
     var me = this, o = this.options;
-    /*global setTimeout */
     me.uiCloseTimeout = setTimeout(function() {
       if(me._isOpen && !me._isBusy) {
         me._isBusy = true;
@@ -125,19 +122,17 @@ $.ui.smarttoggle.defaults = {
   wrapper: '.ui-smarttoggle',
   content: '.ui-content',
   toggle: '.ui-toggle',
+	adjustToggleHeight: true,
 	contentHidden: true,
   openOnEnter: true,
   closeOnLoad: false,
   closeOnLeave: true,
   closeOnBlur: true,
   closeDelay: 500,
-	adjustToggleHeight: true,
   direction: 'up',
   easing: 'swing',
   speed: 500,
   effectType: 'slide2'
 };
 
-
-/*global jQuery */
 })(jQuery);
