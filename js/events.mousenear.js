@@ -9,7 +9,7 @@
  *  jquery-1.3.2.js
  */
 (function($) {
-
+/*global jQuery, document */
 jQuery.event.special.mousenear = {
 	setup: function(data, namespaces) {
 		jQuery(document).bind('mousemove', { elem: this, settings: data }, jQuery.event.special.mousenear.handler);
@@ -21,15 +21,18 @@ jQuery.event.special.mousenear = {
 		var $elem = jQuery(event.data.elem),
 				settings = event.data.settings,
 				args = arguments,
-				pageX, pageY,
+				pageX, pageY, prevCoords = $elem.data('prevCoords') || {},
 				topTrigger, rightTrigger, bottomTrigger, leftTrigger;
 		
 		settings = $.extend({
 			trigger: 'top,right,bottom,left',
-			proximity: 50
+			proximity: 50,
+			directional: false
 		}, settings || {});
 		
 		pageX = event.pageX; pageY = event.pageY;
+		
+		$elem.data('prevCoords', { x:pageX, y:pageY });
 		
 		topTrigger = Math.round($elem.offset().top);
 		rightTrigger = Math.round($elem.offset().left) + $elem.outerWidth();
@@ -37,10 +40,10 @@ jQuery.event.special.mousenear = {
 		leftTrigger = Math.round($elem.offset().left);
 		
 		var hotspots = { 
-			top: pageY > (topTrigger - settings.proximity) && pageY <= topTrigger && pageX >= leftTrigger && pageX <= rightTrigger,
-			right: pageX <= (rightTrigger + settings.proximity) && pageX > rightTrigger && pageY >= topTrigger && pageY <= bottomTrigger,
-			bottom: pageY <= (bottomTrigger + settings.proximity) && pageY > bottomTrigger && pageX >= leftTrigger && pageX <= rightTrigger,
-			left: pageX > (leftTrigger - settings.proximity) && pageX <= leftTrigger && pageY >= topTrigger && pageY <= bottomTrigger
+			top: (settings.directional ? (prevCoords.y < pageY) : true) && pageY > (topTrigger - settings.proximity) && pageY <= topTrigger && pageX >= leftTrigger && pageX <= rightTrigger,
+			right: (settings.directional ? (prevCoords.x > pageX) : true) && pageX <= (rightTrigger + settings.proximity) && pageX > rightTrigger && pageY >= topTrigger && pageY <= bottomTrigger,
+			bottom: (settings.directional ? (prevCoords.y > pageY) : true) && pageY <= (bottomTrigger + settings.proximity) && pageY > bottomTrigger && pageX >= leftTrigger && pageX <= rightTrigger,
+			left: (settings.directional ? (prevCoords.x < pageX) : true) && pageX > (leftTrigger - settings.proximity) && pageX <= leftTrigger && pageY >= topTrigger && pageY <= bottomTrigger
 		};
 		
 		// set event type to "mousenear"
@@ -53,5 +56,4 @@ jQuery.event.special.mousenear = {
 	}
 };
 
-/*global jQuery */
 })(jQuery);
