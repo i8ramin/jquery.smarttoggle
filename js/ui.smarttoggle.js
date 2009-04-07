@@ -14,63 +14,65 @@
 var SmartToggle = {
   _init: function() {
     var self = this,
+				elem = self.element,
         options = this.options,
+				toggleHelper = options.toggleHelper,
 				vAttr = 'marginTop',
 				hAttr = 'marginLeft',
-				direction = this.options.direction || 'up',
+				direction = options.direction || 'up',
 				ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr;
-
-		$(this.element).css({overflow: 'hidden'});
-
-    this.uiToggle = $(options.toggle, this.element).disableSelection();
-    this.uiContent = $(options.content, this.element);
     
-    this._isBusy = false;
-    this._isOpen = options.closeOnLoad || !options.contentHidden;
+    self._isBusy = false;
+    self._isOpen = options.closeOnLoad || !options.contentHidden;
 
-		this.uiToggle.bind('click', function(e, data) {
-			if(self._isOpen) { self._uiClose(e, data); } else { self._uiOpen(e, data); }
-		});
-
-		if((direction == 'left' || direction == 'right') && options.adjustToggleHeight) {
-			this.uiToggle.height(this.element.outerHeight());
+		if(toggleHelper) {
+			toggleHelper.
+				css({cursor:'pointer'}).
+				disableSelection().
+				bind('click', function(e, data) {
+					if(self._isOpen) { self._uiClose(e, data); } else { self._uiOpen(e, data); }
+				}
+			);
+	
+			if((direction == 'left' || direction == 'right') && options.adjustToggleHeight) {
+				toggleHelper.height(elem.outerHeight());
+			}
+			
+			if(options.openOnEnter) {
+	      toggleHelper.bind('mouseover', function(e, data) {
+	        self._uiOpen(e, data);
+	      });
+	    }
+	
+			if(options.closeOnLeave) {
+	      toggleHelper.add(elem).hover(
+	        function(e, data) {
+	          if(self.uiCloseTimeout) { clearTimeout(self.uiCloseTimeout); }
+	        },
+	        function(e, data) {
+	          self._uiClose(e, data);
+	        }
+	      );
+	    }
 		}
 
     if(options.closeOnLoad) {
-      this._uiClose();
+      self._uiClose();
     } else {
 			if(options.contentHidden) {
 				if(options.effectType == 'slide2') {
-					this.uiContent.css(
-						ref, -(ref == vAttr ? this.uiContent.outerHeight() : this.uiContent.outerWidth())
+					elem.css(
+						ref, -(ref == vAttr ? elem.outerHeight() : elem.outerWidth())
 					);
 				}
-				this.uiContent.hide();
-				this._isOpen = false;
+				elem.hide();
+				self._isOpen = false;
 			}
 		}
-
-    if(options.openOnEnter) {
-      this.uiToggle.bind('mouseover', function(e, data) {
-        self._uiOpen(e, data);
-      });
-    }
-    
-    if(options.closeOnLeave) {
-      this.uiToggle.add(this.uiContent).hover(
-        function(e, data) {
-          if(self.uiCloseTimeout) { clearTimeout(self.uiCloseTimeout); }
-        },
-        function(e, data) {
-          self._uiClose(e, data);
-        }
-      );
-    }
     
     this.element.bind('open.smarttoggle', function(e, data) {
       self._uiOpen(e, data);
     });
-    
     this.element.bind('close.smarttoggle', function(e, data) {
       self._uiClose(e, data);
     });
@@ -83,13 +85,15 @@ var SmartToggle = {
     me._isBusy = true;
     me._trigger('openStart', e, me);
     me.uiOpenTimeout = setTimeout(function() {
-      me.uiContent.show(o.effectType, { direction: o.direction, mode: 'show', easing: o.easing }, o.speed, function() {
+      me.element.show(o.effectType, { direction: o.direction, mode: 'show', easing: o.easing }, o.speed, function() {
         me._isOpen = !(me._isBusy = false);
         me._trigger('openStop', e, me);
          
         if(o.closeOnBlur) {
           $(document).bind('click.smarttoggle', function(e, data) {
-						if($.inArray(me.element[0], $.makeArray($(e.target).parents())) != -1) { return; }
+						// if clicking anywhere inside the content area, then return
+						if(me.element[0] == e.target || $.inArray(me.element[0], $.makeArray($(e.target).parents())) != -1) { return; }
+						// otherwise close it
             $(this).unbind('click.smarttoggle');
             me._uiClose(e, data);
           });
@@ -104,7 +108,7 @@ var SmartToggle = {
         me._isBusy = true;
         me._trigger('closeStart', e, me);
         
-        me.uiContent.hide(o.effectType, { direction: o.direction, mode: 'hide', easing: o.easing }, o.speed, function() {
+        me.element.hide(o.effectType, { direction: o.direction, mode: 'hide', easing: o.easing }, o.speed, function() {
           me._isOpen = me._isBusy = false;
           me._trigger('closeStop', e, me);
         });
@@ -119,9 +123,7 @@ var SmartToggle = {
 
 $.widget("ui.smarttoggle", SmartToggle);
 $.ui.smarttoggle.defaults = {
-  wrapper: '.ui-smarttoggle',
-  content: '.ui-content',
-  toggle: '.ui-toggle',
+  toggleHelper: null,
 	adjustToggleHeight: true,
 	contentHidden: true,
   openOnEnter: true,

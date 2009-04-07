@@ -35,15 +35,43 @@ $.effects.slide2 = function(o) {
 				overflowEl = o.options.overflowEl || el.parent(),
         animation = {};
 
-		$(overflowEl).css({overflow: 'hidden'});
+		$.effects._createWrapper(el).css({overflow:'hidden'}); // Create Wrapper
 
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		el.show().animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') { el.hide(); }
+			$.effects.removeWrapper(el);
 			if(o.callback) { o.callback.apply(this, arguments); }
 			el.dequeue();
 		}});
 	});
 };
+
+$.extend($.effects, {
+	_createWrapper: function(element) {
+		//if the element is already wrapped, return it
+		if (element.parent().is('.ui-effects-wrapper'))
+			return element.parent();
+
+		//Cache width, height and float properties of the element, and create a wrapper around it
+		//var props = { width: element.outerWidth(true), height: element.outerHeight(true), 'float': element.css('float') };
+		element.wrap('<div class="ui-effects-wrapper" style="font-size:100%;background:transparent;border:none;margin:0;padding:0"></div>');
+		var wrapper = element.parent();
+
+		//Transfer the positioning of the element to the wrapper
+		if (element.css('position') == 'static') {
+			wrapper.css({ position: 'relative' });
+			element.css({ position: 'relative'} );
+		} else {
+			var top = element.css('top'); if(isNaN(parseInt(top,10))) top = 'auto';
+			var left = element.css('left'); if(isNaN(parseInt(left,10))) left = 'auto';
+			wrapper.css({ position: element.css('position'), top: top, left: left, zIndex: element.css('z-index') }).show();
+			element.css({position: 'relative', top: 0, left: 0 });
+		}
+
+		//wrapper.css(props);
+		return wrapper;
+	}
+});
 
 })(jQuery);

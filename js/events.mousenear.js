@@ -2,6 +2,9 @@
  * Custom jQuery event mousenear
  * Works be defining a proximity around any dom element
  *
+ * KNOWN ISSUE: You can only define this one time on the page. Binding mousenear
+ *              again will override the previous one.
+ *
  * (c) Copyright 2009 Ramin. All Rights Reserved.
  * http://www.getintothis.com
  *
@@ -10,6 +13,7 @@
  */
 (function($) {
 /*global jQuery, document */
+
 jQuery.event.special.mousenear = {
 	setup: function(data, namespaces) {
 		jQuery(document).bind('mousemove', { elem: this, settings: data }, jQuery.event.special.mousenear.handler);
@@ -50,7 +54,6 @@ jQuery.event.special.mousenear = {
 		event.type = "mousenear";
 		
 		$.each(settings.trigger.split(','), function(i, v) {
-			// let jQuery handle the triggering of "mousenear" event handlers
 			if(hotspots[v]) { jQuery.event.handle.apply($elem[0], args); return false; }
 		});
 	}
