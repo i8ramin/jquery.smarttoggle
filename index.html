@@ -18,12 +18,18 @@
 	<script src="js/effects.slide2.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/ui.smarttoggle.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/events.mousenear.js" type="text/javascript" charset="utf-8"></script>
-  
-  <link rel="stylesheet" type="text/css" href="css/ui.smarttoggle.css" media="screen,projection" />
+	
+	<!-- Combo-handled YUI CSS files: --> 
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/ui.smarttoggle.css" />
 </head>
 
 <body>
 	
+<div id="wrapper">
+	<p>Some silly ol content in the main wrapper div...</p>
+</div>
+
 <div id="top-bar">
 	<div class="inner">
 		<div class="ui-content">
@@ -55,10 +61,6 @@ $('#top-bar').bind('mousenear', function() {
 
 })(jQuery);
 </script>
-
-<div id="wrapper">
-	<p>Some silly ol content in the main wrapper div...</p>
-</div>
 
 </body>
 </html>
