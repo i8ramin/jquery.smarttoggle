@@ -25,6 +25,7 @@ $.effects.slide2 = function(o) {
 	
 	return this.queue(function() {
 		var el = $(this),
+				props = ['position','top','left'],
 				vAttr = 'marginTop',
 				hAttr = 'marginLeft',
 		    mode = $.effects.setMode(el, o.options.mode),
@@ -36,10 +37,13 @@ $.effects.slide2 = function(o) {
         animation = {};
 
 		$.effects._createWrapper(el).css({overflow:'hidden'}); // Create Wrapper
+		$.effects.save(el, props);
+		el.show();
 
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
-		el.show().animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
+		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') { el.hide(); }
+			$.effects.restore(el, props);
 			$.effects.removeWrapper(el);
 			if(o.callback) { o.callback.apply(this, arguments); }
 			el.dequeue();
