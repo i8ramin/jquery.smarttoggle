@@ -25,9 +25,11 @@
 <body>
 	
 <div id="top-bar">
-	<div class="ui-content">
-		<h1>Damn. This toggler be maad smart!</h1>
-		<p>It dices. It slices. It makes toast. It makes babies. It does it all.</p>
+	<div class="inner">
+		<div class="ui-content">
+			<h1>Damn. This toggler be maad smart!</h1>
+			<p>It dices. It slices. It makes toast. It makes babies. It does it all.</p>
+		</div>
 	</div>
 	<div class="ui-toggle"></div>
 </div>
@@ -41,7 +43,6 @@ var toggleHelper = $('#top-bar .ui-toggle'),
 toggleContent.smarttoggle({
 	toggleHelper: toggleHelper,
 	openOnEnter: false,
-	//closeOnBlur: false,
 	closeOnLeave: false,
 	easing: 'easeOutBounce'
 });
@@ -56,6 +57,7 @@ $('#top-bar').bind('mousenear', function() {
 </script>
 
 <div id="wrapper">
+	<p>Some silly ol content in the main wrapper div...</p>
 </div>
 
 </body>
