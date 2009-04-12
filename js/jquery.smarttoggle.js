@@ -8,12 +8,12 @@
  *  effects.core.js
  */
 (function($) {
-/*global jQuery, document, setTimeout, clearTimeout */
-
+/*global jQuery, document, setTimeout, clearTimeout, handleBlur, isOpen */
 
 $.fn.smarttoggle = function() {
 	var self = this,
-			options = arguments[1] = $.extend({
+			effect = arguments[0] || 'slide2',
+			options = $.extend({
 				toggler: $('.ui-toggle', this),
 				content: $('.ui-content', this),
 				blur: true,
@@ -21,8 +21,7 @@ $.fn.smarttoggle = function() {
 				direction: 'up',
 			  duration: 1000
 			}, arguments[1] || {}),
-			effect = arguments[0] || 'slide2',
-			args = this._normalizeArguments(arguments, 'toggle');
+			args = this._normalizeArguments(arguments, options, 'toggle');
 	
 	return this.each(function() {
 		options.toggler.bind('click', function() {
@@ -33,19 +32,19 @@ $.fn.smarttoggle = function() {
 			handleBlur(options, args);
 		}
 	});
-	
-	function isOpen(el) {
-		return !$(el).is(':hidden');
-	}
-	
-	function handleBlur(options, args) {
-		var el = options.content;
-		$(document).bind('click.smarttoggle', function(e) {
-			if(isOpen(el) && !(options.toggler == e.target || el[0] == e.target || $.inArray(el[0], $.makeArray($(e.target).parents())) != -1)) {
-				el.toggle.apply(el, args);
-			}
-    });
-	}
+};
+
+function isOpen(el) {
+	return !$(el).is(':hidden');
+}
+
+function handleBlur(options, args) {
+	var el = options.content;
+	$(document).bind('click.smarttoggle', function(e) {
+		if(isOpen(el) && !(options.toggler == e.target || el[0] == e.target || $.inArray(el[0], $.makeArray($(e.target).parents())) != -1)) {
+			el.toggle.apply(el, args);
+		}
+  });
 }
 
 //Extend the methods of jQuery
@@ -73,13 +72,12 @@ $.fn.extend({
 			.css('MozUserSelect', 'none')
 			.bind('selectstart.ui', function() { return false; });
 	},
-	_normalizeArguments: function(a, m) {
-		var o = a[1] && a[1].constructor == Object ? a[1] : {}; if(m) o.mode = m,
-				//either comes from options.duration or the secon/third argument
-				speed = a[1] && a[1].constructor != Object ? a[1] : (o.duration ? o.duration : a[2]),
+	_normalizeArguments: function(a, o, m) {
+		//either comes from options.duration or the secon/third argument
+		var speed = a[1] && a[1].constructor != Object ? a[1] : (o.duration ? o.duration : a[2]),
 				callback = o.callback || ( $.isFunction(a[1]) && a[1] ) || ( $.isFunction(a[2]) && a[2] ) || ( $.isFunction(a[3]) && a[3] );
-
-		speed = $.fx.off ? 0 : typeof speed === "number" ? speed : $.fx.speeds[speed] || $.fx.speeds._default;
+		speed = $.fx.off ? 0 : typeof speed === "number" ? speed : $.fx.speeds[speed] || $.fx.speeds._default;		
+		if(m) { o.mode = m; }
 		return [a[0], o, speed, callback];
 	}
 });
