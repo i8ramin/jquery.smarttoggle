@@ -2,7 +2,7 @@
  * Custom jQuery event mousenear
  * Works be defining a proximity around any dom element
  *
- * KNOWN ISSUE: You can only define this one time on the page. Binding mousenear
+ * KNOWN LIMITATION: You can only define this one time on the page. Binding mousenear
  *              again will override the previous one.
  *
  * (c) Copyright 2009 Ramin. All Rights Reserved.

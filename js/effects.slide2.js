@@ -16,29 +16,33 @@
  */
 (function($) {
 
-$.effects.slide2 = function(o) {
+$.effects.slide2 = function(o) {	
 	o.options = $.extend({
 		mode: 'show',
 		easing: 'swing',
-		direction: 'left'
+		direction: 'left',
 	}, o.options || {});
 	
 	return this.queue(function() {
 		var el = $(this),
-				props = ['position','top','left'],
-				vAttr = 'marginTop',
-				hAttr = 'marginLeft',
+				props = ['position','marginTop','marginLeft','marginRight'],
 		    mode = $.effects.setMode(el, o.options.mode),
-        direction = o.options.direction,
+        direction = o.options.direction || 'up',
+				vAttr = 'marginTop',
+				hAttr = direction == 'right' ? 'marginRight' : 'marginLeft',
         ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr,
-				motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg',
-        distance = o.options.distance || (ref == vAttr ? el.outerHeight() : el.outerWidth()),
-				overflowEl = o.options.overflowEl || el.parent(),
+				motion = (direction == 'up' || direction == 'left' || direction == 'right') ? 'pos' : 'neg',
+        distance = o.options.distance,
         animation = {};
 
-		$.effects._createWrapper(el).css({overflow:'hidden'}); // Create Wrapper
-		$.effects.save(el, props);
-		el.show();
+		$.effects.save(el, props); el.show(); // save props and show
+		// important to get distance after el.show(), otherwise we get wrong values
+		distance = distance || (ref == vAttr ? el.outerHeight() : el.outerWidth())
+		
+		// if about to show, then shift the contents first
+		if(mode == 'show') { el.css(ref, -distance); }
+		
+		_createWrapper(el).css({overflow:'hidden'}); // Create Wrapper
 
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
@@ -51,31 +55,14 @@ $.effects.slide2 = function(o) {
 	});
 };
 
-$.extend($.effects, {
-	_createWrapper: function(element) {
-		//if the element is already wrapped, return it
-		if (element.parent().is('.ui-effects-wrapper'))
-			return element.parent();
-
-		//Cache width, height and float properties of the element, and create a wrapper around it
-		//var props = { width: element.outerWidth(true), height: element.outerHeight(true), 'float': element.css('float') };
-		element.wrap('<div class="ui-effects-wrapper" style="font-size:100%;background:transparent;border:none;margin:0;padding:0"></div>');
-		var wrapper = element.parent();
-
-		//Transfer the positioning of the element to the wrapper
-		if (element.css('position') == 'static') {
-			wrapper.css({ position: 'relative' });
-			element.css({ position: 'relative'} );
-		} else {
-			var top = element.css('top'); if(isNaN(parseInt(top,10))) top = 'auto';
-			var left = element.css('left'); if(isNaN(parseInt(left,10))) left = 'auto';
-			wrapper.css({ position: element.css('position'), top: top, left: left, zIndex: element.css('z-index') }).show();
-			element.css({position: 'relative', top: 0, left: 0 });
-		}
-
-		//wrapper.css(props);
-		return wrapper;
+function _createWrapper(element) {
+	//if the element is already wrapped, return it
+	if (element.parent().is('.ui-effects-wrapper')) {
+		return element.parent();
 	}
-});
+
+	element.wrap('<div class="ui-effects-wrapper" style="font-size:100%;background:transparent;border:none;margin:0;padding:0"></div>');
+	return element.parent();
+}
 
 })(jQuery);
