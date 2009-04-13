@@ -15,13 +15,11 @@
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
   <link rel="stylesheet" type="text/css" href="css/smarttoggle.css" />
 	<!--[if IE]>
-	/* I <3 IE */
 	<style type="text/css">
 		#top-bar {
 			position: absolute;
 		}
 	</style>
-	/* (NOT) */
 	<![endif]-->
 </head>
 
@@ -49,24 +47,30 @@
 	
 	</div>
 	
-	<div id="right-bar" class="panel">
-		<div class="inner">
-			<div class="ui-content">
-				<h1>Damn. This toggler be maad smart!</h1>
-				<p>It dices. It slices. It makes toast. It makes babies. <em>It does it all.</em></p>
-			</div>
-		</div>
+	<div id="right-bar" class="panel left-right">
 		<div class="ui-toggle">menu</div>
+		<div class="inner">
+			<ul class="ui-content clearfix">
+				<li><a href="">Home</a></li>
+				<li><a href="">Products</a></li>
+				<li><a href="">Clients</a></li>
+				<li><a href="">About Us</a></li>
+				<li><a href="">Contact Us</a></li>
+			</ul>
+		</div>
 	</div>
 	
 </div>
 
-<div id="left-bar" class="panel closed">
+<div id="left-bar" class="panel left-right">
 	<div class="inner">
-		<div class="ui-content">
-			<h1>Damn. This toggler be maad smart!</h1>
-			<p>It dices. It slices. It makes toast. It makes babies. <em>It does it all.</em></p>
-		</div>
+		<ul class="ui-content clearfix">
+			<li><a href="">Home</a></li>
+			<li><a href="">Products</a></li>
+			<li><a href="">Clients</a></li>
+			<li><a href="">About Us</a></li>
+			<li><a href="">Contact Us</a></li>
+		</ul>
 	</div>
 	<div class="ui-toggle">menu</div>
 </div>
@@ -88,7 +92,10 @@ $('#left-bar').smarttoggle('slide2', {
 	direction: 'left'
 });
 $('#right-bar').smarttoggle('slide2', {
-	direction: 'right'
+	direction: 'right',
+	easing: 'swing',
+	duration: 500,
+	blur: false
 });
 
 </script>

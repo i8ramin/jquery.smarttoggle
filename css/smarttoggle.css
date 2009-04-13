@@ -20,8 +20,6 @@ body, html {
 .panel {
 	z-index: 999;
 	position: absolute;
-	top: 0;
-	left: 0;
 }
 .panel h1 {
 	font-size: 2em;
@@ -36,7 +34,6 @@ body, html {
 .panel .ui-content {
 	background-color: #2f3738;
 	color: #fff;
-	padding: 15px;
 }
 .panel .ui-toggle {
 	font-size: 10px;
@@ -51,12 +48,15 @@ body, html {
 #top-bar {
 	width: 100%;
 	position: fixed;
+	top: 0;
+	left: 0;
 }
 #top-bar .inner {
 	border-bottom: 3px solid #59d8e5;
 }
 #top-bar .ui-content {
 	display: none;
+	padding: 15px;
 }
 #top-bar .ui-toggle {
 	text-align: center;
@@ -64,17 +64,41 @@ body, html {
 	margin: 0 auto;
 }
 
+
+.left-right .ui-content {
+	display: none;
+	background-color: transparent;
+}
+.left-right .ui-content li {
+	display: block;
+}
+.left-right .ui-content ul,
+.left-right .ui-content li {
+	margin: 0; padding: 0;
+}
+.left-right .ui-content li a {
+	display: inline-block;
+	padding: 0 15px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #69c;
+	color: #fff;
+	text-decoration: none;
+	font-size: 12px;
+}
+.left-right .ui-toggle {
+	height: 30px;
+}
+
+
 #left-bar {
 	top: 100px;
-}
-#left-bar .inner {
-	border-right: 3px solid #59d8e5;
-	height: 88px;
+	left: 0;
 	float: left;
 }
-#left-bar .ui-content {
-	display: none;
-}
+#left-bar .inner,
+#left-bar .ui-content,
+#left-bar .ui-content li,
 #left-bar .ui-toggle {
 	float: left;
 }
@@ -82,13 +106,12 @@ body, html {
 #right-bar {
 	top: 150px;
 	right: 0;
-	left: auto;
-}
-#right-bar .inner {
-	border-left: 3px solid #59d8e5;
-	height: 88px;
 	float: right;
+	width: auto;
 }
+#right-bar .inner,
+#right-bar .ui-content,
+#right-bar .ui-content li,
 #right-bar .ui-toggle {
 	float: right;
 }
