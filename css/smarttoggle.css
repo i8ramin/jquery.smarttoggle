@@ -41,7 +41,7 @@ body, html {
 .panel .ui-toggle {
 	font-size: 10px;
 	font-weight: bold;
-	padding: 2px;
+	padding: 0 4px;
 	position: relative;
 	background-color: #59d8e5;
 	cursor: pointer;
@@ -50,6 +50,7 @@ body, html {
 
 #top-bar {
 	width: 100%;
+	position: fixed;
 }
 #top-bar .inner {
 	border-bottom: 3px solid #59d8e5;

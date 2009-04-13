@@ -14,19 +14,18 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
   <link rel="stylesheet" type="text/css" href="css/smarttoggle.css" />
+	<!--[if IE]>
+	/* I <3 IE */
+	<style type="text/css">
+		#top-bar {
+			position: absolute;
+		}
+	</style>
+	/* (NOT) */
+	<![endif]-->
 </head>
 
 <body>
-	
-<div id="top-bar" class="panel">
-	<div class="inner">
-		<div class="ui-content">
-			<h1>Damn. This toggler be maad smart!</h1>
-			<p>It dices. It slices. It makes toast. It makes babies. <em>It does it all.</em></p>
-		</div>
-	</div>
-	<div class="ui-toggle">menu</div>
-</div>
 	
 <div id="wrapper">
 	<div class="content">
@@ -63,6 +62,16 @@
 </div>
 
 <div id="left-bar" class="panel closed">
+	<div class="inner">
+		<div class="ui-content">
+			<h1>Damn. This toggler be maad smart!</h1>
+			<p>It dices. It slices. It makes toast. It makes babies. <em>It does it all.</em></p>
+		</div>
+	</div>
+	<div class="ui-toggle">menu</div>
+</div>
+
+<div id="top-bar" class="panel">
 	<div class="inner">
 		<div class="ui-content">
 			<h1>Damn. This toggler be maad smart!</h1>
