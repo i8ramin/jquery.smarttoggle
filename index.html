@@ -47,7 +47,7 @@
 	
 	</div>
 	
-	<div id="right-bar" class="panel left-right">
+	<div id="right-bar" class="panel left-right clearfix">
 		<div class="ui-toggle">menu</div>
 		<div class="inner">
 			<ul class="ui-content clearfix">
@@ -62,7 +62,7 @@
 	
 </div>
 
-<div id="left-bar" class="panel left-right">
+<div id="left-bar" class="panel left-right clearfix">
 	<div class="inner">
 		<ul class="ui-content clearfix">
 			<li><a href="">Home</a></li>
@@ -93,8 +93,7 @@ $('#left-bar').smarttoggle('slide2', {
 });
 $('#right-bar').smarttoggle('slide2', {
 	direction: 'right',
-	easing: 'swing',
-	duration: 500,
+	easing: 'easeInOutExpo',
 	blur: false
 });
 

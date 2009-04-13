@@ -23,6 +23,9 @@ $.fn.smarttoggle = function() {
 			args = this._normalizeArguments(arguments, options, 'toggle');
 			
 	return this.each(function() {
+		if(options.direction == 'left' || options.direction == 'right') {
+			options.content.width(options.content.outerWidth()).hide(); // fix for Safari
+		}
 		options.toggler.bind('click', function() {
 			options.content.toggle.apply(options.content, args);
 		})._disableSelection();

@@ -66,7 +66,7 @@ body, html {
 
 
 .left-right .ui-content {
-	display: none;
+	xdisplay: none;
 	background-color: transparent;
 }
 .left-right .ui-content li {
@@ -94,7 +94,8 @@ body, html {
 #left-bar {
 	top: 100px;
 	left: 0;
-	float: left;
+}
+#left-bar .ui-content {
 }
 #left-bar .inner,
 #left-bar .ui-content,
@@ -106,8 +107,8 @@ body, html {
 #right-bar {
 	top: 150px;
 	right: 0;
-	float: right;
-	width: auto;
+}
+#right-bar .ui-content {
 }
 #right-bar .inner,
 #right-bar .ui-content,
