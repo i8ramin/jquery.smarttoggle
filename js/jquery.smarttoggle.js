@@ -12,7 +12,6 @@
 
 $.fn.smarttoggle = function() {
 	var self = this,
-			effect = arguments[0] || 'slide2',
 			options = $.extend({
 				toggler: $('.ui-toggle', this),
 				content: $('.ui-content', this),
@@ -22,7 +21,7 @@ $.fn.smarttoggle = function() {
 			  duration: 1000
 			}, arguments[1] || {}),
 			args = this._normalizeArguments(arguments, options, 'toggle');
-	
+			
 	return this.each(function() {
 		options.toggler.bind('click', function() {
 			options.content.toggle.apply(options.content, args);
@@ -62,8 +61,8 @@ $.fn.extend({
 				
 		callback = function() {
 			self.data('isBusy', false);
-			$.isFunction(origCallback) && origCallback.apply(this, arguments);
-		}
+			if($.isFunction(origCallback)) { origCallback.apply(this, arguments); }
+		};
 		return this._effect.apply(this, arguments);
 	},
 	_disableSelection: function() {

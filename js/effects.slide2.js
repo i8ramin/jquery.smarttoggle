@@ -15,12 +15,12 @@
  *  effects.core.js
  */
 (function($) {
-
-$.effects.slide2 = function(o) {	
+/*global jQuery, _createWrapper */
+$.effects.slide2 = function(o) {
 	o.options = $.extend({
 		mode: 'show',
 		easing: 'swing',
-		direction: 'left',
+		direction: 'left'
 	}, o.options || {});
 	
 	return this.queue(function() {
@@ -37,7 +37,7 @@ $.effects.slide2 = function(o) {
 
 		$.effects.save(el, props); el.show(); // save props and show
 		// important to get distance after el.show(), otherwise we get wrong values
-		distance = distance || (ref == vAttr ? el.outerHeight() : el.outerWidth())
+		distance = distance || (ref == vAttr ? el.outerHeight() : el.outerWidth());
 		
 		// if about to show, then shift the contents first
 		if(mode == 'show') { el.css(ref, -distance); }
