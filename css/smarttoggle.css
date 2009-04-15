@@ -66,7 +66,6 @@ body, html {
 
 
 .left-right .ui-content {
-	xdisplay: none;
 	background-color: transparent;
 }
 .left-right .ui-content li {
@@ -75,6 +74,9 @@ body, html {
 .left-right .ui-content ul,
 .left-right .ui-content li {
 	margin: 0; padding: 0;
+}
+.left-right .ui-content li {
+	float: left;
 }
 .left-right .ui-content li a {
 	display: inline-block;
@@ -99,7 +101,6 @@ body, html {
 }
 #left-bar .inner,
 #left-bar .ui-content,
-#left-bar .ui-content li,
 #left-bar .ui-toggle {
 	float: left;
 }
@@ -112,10 +113,22 @@ body, html {
 }
 #right-bar .inner,
 #right-bar .ui-content,
-#right-bar .ui-content li,
 #right-bar .ui-toggle {
 	float: right;
 }
+
+#right-bar-2 {
+	top: 100px;
+	right: 0;
+}
+#right-bar-2 .ui-content {
+}
+#right-bar-2 .inner,
+#right-bar-2 .ui-content,
+#right-bar-2 .ui-toggle {
+	float: right;
+}
+
 
 /********* Hacks! **********/
 

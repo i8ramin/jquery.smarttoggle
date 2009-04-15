@@ -51,11 +51,11 @@
 		<div class="ui-toggle">menu</div>
 		<div class="inner">
 			<ul class="ui-content clearfix">
-				<li><a href="">Home</a></li>
-				<li><a href="">Products</a></li>
-				<li><a href="">Clients</a></li>
-				<li><a href="">About Us</a></li>
-				<li><a href="">Contact Us</a></li>
+				<li class="step first"><a href="">Home</a></li>
+				<li class="step"><a href="">Products</a></li>
+				<li class="step"><a href="">Clients</a></li>
+				<li class="step"><a href="">About Us</a></li>
+				<li class="step last"><a href="">Contact Us</a></li>
 			</ul>
 		</div>
 	</div>
@@ -73,6 +73,19 @@
 		</ul>
 	</div>
 	<div class="ui-toggle">menu</div>
+</div>
+
+<div id="right-bar-2" class="panel left-right clearfix">
+	<div class="ui-toggle">menu</div>
+	<div class="inner">
+		<ul class="ui-content clearfix">
+			<li><a href="">Home</a></li>
+			<li><a href="">Products</a></li>
+			<li><a href="">Clients</a></li>
+			<li><a href="">About Us</a></li>
+			<li><a href="">Contact Us</a></li>
+		</ul>
+	</div>
 </div>
 
 <div id="top-bar" class="panel">
@@ -96,6 +109,14 @@ $('#right-bar').smarttoggle('slide2', {
 	easing: 'easeInOutExpo',
 	blur: false
 });
+$('#right-bar-2').smarttoggle('slide2', {
+	direction: 'right',
+	easing: 'easeInOutExpo',
+	contentHidden: false
+}, function() {
+	console.log('hi');
+});
+
 
 </script>
 

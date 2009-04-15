@@ -23,7 +23,7 @@ $.effects.slide2 = function(o) {
 	
 	return this.queue(function() {
 		var el = $(this),
-				props = ['position','marginTop','marginLeft','marginRight'],
+				//props = ['position','marginTop','marginLeft','marginRight'],
 		    mode = $.effects.setMode(el, o.options.mode),
         direction = o.options.direction || 'up',
 				vAttr = 'marginTop',
@@ -31,22 +31,26 @@ $.effects.slide2 = function(o) {
         ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr,
 				motion = (direction == 'up' || direction == 'left' || direction == 'right') ? 'pos' : 'neg',
         distance = o.options.distance,
+				offset = ref == vAttr ? el.outerHeight() : el.outerWidth(),
         animation = {};
 
-		$.effects.save(el, props); el.show(); // save props and show
+		//$.effects.save(el, props);
+		el.show();
 		// important to get distance after el.show(), otherwise we get wrong values
-		distance = distance || (ref == vAttr ? el.outerHeight() : el.outerWidth());
+		distance = distance || offset;
 		
 		// if about to show, then shift the contents first
-		if(mode == 'show') { el.css(ref, -distance); }
+		if(mode == 'show') { el.css(ref, -offset); }
 		
 		_createWrapper(el).css({overflow:'hidden'}); // Create Wrapper
 
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(mode == 'hide') { el.hide(); }
-			$.effects.restore(el, props);
-			$.effects.removeWrapper(el);
+			if(mode == 'hide') {
+				el.hide();
+				//$.effects.restore(el, props);
+				$.effects.removeWrapper(el);
+			}
 			if(o.callback) { o.callback.apply(this, arguments); }
 			el.dequeue();
 		}});

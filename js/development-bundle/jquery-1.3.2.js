@@ -3866,11 +3866,10 @@ jQuery.fn.extend({
 		var optall = jQuery.speed(speed, easing, callback);
 
 		return this[ optall.queue === false ? "each" : "queue" ](function(){
-		
 			var opt = jQuery.extend({}, optall), p,
 				hidden = this.nodeType == 1 && jQuery(this).is(":hidden"),
 				self = this;
-	
+
 			for ( p in prop ) {
 				if ( prop[p] == "hide" && hidden || prop[p] == "show" && !hidden )
 					return opt.complete.call(this);
@@ -4028,7 +4027,7 @@ jQuery.fx.prototype = {
 	cur: function(force){
 		if ( this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null) )
 			return this.elem[ this.prop ];
-
+			
 		var r = parseFloat(jQuery.css(this.elem, this.prop, force));
 		return r && r > -10000 ? r : parseFloat(jQuery.curCSS(this.elem, this.prop)) || 0;
 	},
