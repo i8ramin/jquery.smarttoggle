@@ -9,6 +9,7 @@
   <script src="js/development-bundle/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/development-bundle/ui/effects.core.js" type="text/javascript" charset="utf-8"></script>
 
+	<script src="js/effects.core.ext.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/effects.slide2.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/jquery.smarttoggle.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -107,7 +108,8 @@ $('#left-bar').smarttoggle('slide2', {
 $('#right-bar').smarttoggle('slide2', {
 	direction: 'right',
 	easing: 'easeInOutExpo',
-	blur: false
+	eventType: 'hover',
+	stepMode: true
 });
 $('#right-bar-2').smarttoggle('slide2', {
 	direction: 'right',

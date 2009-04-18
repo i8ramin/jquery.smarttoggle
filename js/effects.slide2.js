@@ -23,7 +23,7 @@ $.effects.slide2 = function(o) {
 	
 	return this.queue(function() {
 		var el = $(this),
-				//props = ['position','marginTop','marginLeft','marginRight'],
+				props = ['position','marginTop','marginLeft','marginRight'],
 		    mode = $.effects.setMode(el, o.options.mode),
         direction = o.options.direction || 'up',
 				vAttr = 'marginTop',
@@ -34,9 +34,8 @@ $.effects.slide2 = function(o) {
 				offset = ref == vAttr ? el.outerHeight() : el.outerWidth(),
         animation = {};
 
-		//$.effects.save(el, props);
+		$.effects.save(el, props);
 		el.show();
-		// important to get distance after el.show(), otherwise we get wrong values
 		distance = distance || offset;
 		
 		// if about to show, then shift the contents first
@@ -46,11 +45,9 @@ $.effects.slide2 = function(o) {
 
 		animation[ref] = (mode == 'show' ? (motion == 'pos' ? '+=' : '-=') : (motion == 'pos' ? '-=' : '+=')) + distance;
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(mode == 'hide') {
-				el.hide();
-				//$.effects.restore(el, props);
-				$.effects.removeWrapper(el);
-			}
+			if(mode == 'hide') { el.hide(); }
+			$.effects.restore(el, props);
+			$.effects.removeWrapper(el);
 			if(o.callback) { o.callback.apply(this, arguments); }
 			el.dequeue();
 		}});

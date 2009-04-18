@@ -55,7 +55,6 @@ body, html {
 	border-bottom: 3px solid #59d8e5;
 }
 #top-bar .ui-content {
-	display: none;
 	padding: 15px;
 }
 #top-bar .ui-toggle {
@@ -87,6 +86,10 @@ body, html {
 	color: #fff;
 	text-decoration: none;
 	font-size: 12px;
+}
+.left-right .ui-content li a:hover {
+	background-color: #000;
+	color: #fff;
 }
 .left-right .ui-toggle {
 	height: 30px;
