@@ -76,11 +76,8 @@ function handleBlur(me, options, args) {
 			count = me.data('smarttoggleCount');
 			
 	$(document).bind('click.smarttoggle-' + count, function(e) {
-		if(content._isOpen() && 
-				!(options.toggler[0] == e.target ||
-					content[0] == e.target ||
-					$.inArray(content[0], $.makeArray($(e.target).parents())) != -1)) {
-			args[1] = $.extend({ mode: 'hide' }, args[1]); // set the mode to 'hide'
+		if(content._isOpen() && me[0] !== e.target.offsetParent) {
+			args[1].mode = 'hide'; // set the mode to 'hide'
 			content.effect.apply(content, args);
 		}
 		return false;
