@@ -2,9 +2,6 @@
  * Slide 2
  * Based on the original effects.slide code, but with slight modifications
  * to slide so that it uses CSS margin values as opposed to top/left.
- * One caveat is that this doesn't work very well in IE since IE
- * doesn't seem to respect the overflow:hidden rules. If IE is a concern to you,
- * then I recommend sticking with the original effects.slide effect.
  *
  * (c) Copyright 2009 Ramin. All Rights Reserved.
  * http://www.getintothis.com

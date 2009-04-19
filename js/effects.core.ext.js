@@ -1,4 +1,8 @@
 /*
+ * Modified the effects.core.effec function so that
+ * it does not queue animations on multiple triggers
+ * if the animation is currently busy.
+ *
  * (c) Copyright 2009 Ramin. All Rights Reserved.
  * http://www.getintothis.com
  *
@@ -25,6 +29,7 @@ $.fn.extend({
 		
 		return this._effect.apply(this, arguments);
 	},
+	// code taken from the ui.core file
 	_disableSelection: function() {
 		return this
 			.attr('unselectable', 'on')

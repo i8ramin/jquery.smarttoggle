@@ -11,6 +11,10 @@
 
 	<script src="js/effects.core.ext.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/effects.slide2.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="js/events.blurany.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/events.mousenear.js" type="text/javascript" charset="utf-8"></script>
+
   <script src="js/jquery.smarttoggle.js" type="text/javascript" charset="utf-8"></script>
 	
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
@@ -28,7 +32,7 @@
 	
 <div id="wrapper">
 	<div class="content">
-		
+
 	<p>For twelve years you&#8217;ve been asking &#8220;Who is John Galt?&#8221; This is John Galt speaking. I&#8217;m the man who&#8217;s taken away your victims and thus destroyed your world. You&#8217;ve heard it said that this is an age of moral crisis and that Man&#8217;s sins are destroying the world. But your chief virtue has been sacrifice, and you&#8217;ve demanded more sacrifices at every disaster. You&#8217;ve sacrificed justice to mercy and happiness to duty. So why should you be afraid of the world around you?</p>
 
 	<p>Your world is only the product of your sacrifices. While you were dragging the men who made your happiness possible to your sacrificial altars, I beat you to it. I reached them first and told them about the game you were playing and where it would take them. I explained the consequences of your &#8216;brother-love&#8217; morality, which they had been too innocently generous to understand. You won&#8217;t find them now, when you need them more than ever.</p>
@@ -47,6 +51,50 @@
 	<p><b>The world will change when you are ready to pronounce this oath:<br/>I swear by my Life and my love of it that I will never live for the sake of another man,<br/>nor ask another man to live for the sake of mine.</b></p>
 	
 	</div>
+	
+	<style type="text/css">
+	.box {
+		position: absolute;
+		border: 2px solid #000;
+		background-color: #999;
+	}
+	.box-active {
+		background-color: red;
+	}
+	#box-1 {
+		top: 300px;
+		left: 150px;
+		width: 200px;
+		height: 100px;
+	}
+	#box-2 {
+		top: 120px;
+		left: 50px;
+		width: 100px;
+		height: 50px;
+	}
+	#box-3 {
+		top: 200px;
+		left: 250px;
+		width: 170px;
+		height: 30px;
+	}
+	</style>
+	
+	<div id="box-1" class="box"></div>
+	<div id="box-2" class="box"></div>
+	<div id="box-3" class="box"></div>
+	
+	<script type="text/javascript">
+	$('.box').hovernear(
+		function(e) {
+			$(this).addClass('box-active').text('t:' + e.info.top + ', r:' + e.info.right + ', b:' + e.info.bottom + ', l:' + e.info.left);
+		},
+		function(e) {
+			$(this).removeClass('box-active').text('bye!');
+		}
+	);
+	</script>
 	
 	<div id="right-bar" class="panel left-right clearfix">
 		<div class="ui-toggle">menu</div>
@@ -116,9 +164,7 @@ $('#right-bar-2').smarttoggle('slide2', {
 	easing: 'easeInOutExpo',
 	contentHidden: false
 }, function() {
-	console.log('hi');
 });
-
 
 </script>
 

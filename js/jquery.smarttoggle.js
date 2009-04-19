@@ -61,8 +61,9 @@ $.fn.smarttoggle = function() {
 		}
 				
 		if(options.blur) {
-			me.data('smarttoggleCount', smarttoggleCount++);
-			handleBlur(me, options, normalizedArgs);
+			me.blurany(function() {
+				if(content._isOpen()) { content.effect.call(content, effect, effectOpts, effectDur, effectCallback); }
+			});
 		}
 		
 		toggler.bind('click.smarttoggle', function() {
