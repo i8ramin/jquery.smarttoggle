@@ -41,9 +41,8 @@ $.event.special.mousenear = {
 			limits = $.event.special.mousenear._defineLimits(triggers, pageX, pageY);
 			
 			e.type = 'mousenear';
-			e.info = {top:0,right:0,bottom:0,left:0};
 			$.each(settings.trigger.split(','), function(i, v) {
-				e.info[v] = hotspots[v] ? limits[v] : 0;
+				e.proximity = 1 - (limits[v] / settings.proximity);
 				if(hotspots[v]) {
 					$elem.data('mousenearActive', true);
 					$.event.handle.apply(elem, args);
@@ -80,8 +79,8 @@ $.event.special.mousenear = {
 	_defineLimits: function(triggers, pageX, pageY) {
 		return {
 			top: Math.abs(pageY - triggers.top),
-			right: pageX - triggers.right,
-			bottom: pageY - triggers.bottom,
+			right: Math.abs(pageX - triggers.right),
+			bottom: Math.abs(pageY - triggers.bottom),
 			left: Math.abs(pageX - triggers.left)
 		}
 	}

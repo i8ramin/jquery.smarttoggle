@@ -88,10 +88,10 @@
 	<script type="text/javascript">
 	$('.box').hovernear(
 		function(e) {
-			$(this).addClass('box-active').text('t:' + e.info.top + ', r:' + e.info.right + ', b:' + e.info.bottom + ', l:' + e.info.left);
+			$(this).addClass('box-active').css('background-color', 'rgb('+(e.proximity*75 + 50)+'%,'+(e.proximity*80 + 10)+'%,'+(e.proximity*100 + 10)+'%)');
 		},
 		function(e) {
-			$(this).removeClass('box-active').text('bye!');
+			$(this).removeClass('box-active');
 		}
 	);
 	</script>
