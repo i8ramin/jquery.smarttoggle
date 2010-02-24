@@ -18,8 +18,8 @@ $.event.special.blurany = {
 		var elem = this, $elem = $(this);
 		
 		$elem.data('blurcount', ++blurCount);
-		$(document).bind('click.blur-' + $elem.data('blurcount'), function(e) {
-			if(elem !== e.target && elem !== e.target.offsetParent) {
+		$(document).bind('click.blur-' + $elem.data('blurcount'), function(e) {			
+			if(elem !== e.target && elem !== e.target.offsetParent && $.inArray(elem, $(e.target).parents()) == -1) {
 				e.type = 'blurany';
 				$.event.handle.apply(elem, arguments);
 			}
