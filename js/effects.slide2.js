@@ -20,16 +20,16 @@ $.effects.slide2 = function(o) {
 	
 	return this.queue(function() {
 		var el = $(this),
-				props = ['position','marginTop','marginLeft','marginRight'],
+                    props = ['position','marginTop','marginLeft','marginRight'],
 		    mode = $.effects.setMode(el, o.options.mode),
-        direction = o.options.direction || 'up',
-				vAttr = 'marginTop',
-				hAttr = direction == 'right' ? 'marginRight' : 'marginLeft',
-        ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr,
-				motion = (direction == 'up' || direction == 'left' || direction == 'right') ? 'pos' : 'neg',
-        distance = o.options.distance,
-				offset = ref == vAttr ? el.outerHeight() : el.outerWidth(),
-        animation = {};
+                    direction = o.options.direction || 'up',
+                    vAttr = 'marginTop',
+                    hAttr = direction == 'right' ? 'marginRight' : 'marginLeft',
+                    ref = (direction == 'up' || direction == 'down') ? vAttr : hAttr,
+                    motion = (direction == 'up' || direction == 'left' || direction == 'right') ? 'pos' : 'neg',
+                    distance = o.options.distance,
+                    offset = ref == vAttr ? el.outerHeight() : el.outerWidth(),
+                    animation = {};
 
 		$.effects.save(el, props);
 		el.show();
